@@ -1,0 +1,34 @@
+{
+	"term": "FALL2018",
+	"courses": [
+		{
+			"name": "Human Computer Interactions 1",
+			"courseID": "COMP3020",
+			"department": "Computer Science",
+			"sections": [
+				{
+					"section": "A01",
+					"days": "MWF",
+					"instructor": "Prof. 1",
+					"location": "Engineering Building",
+					"capacity": "80",
+					"time": {
+						"start": "0930",
+						"end": "1020"
+					}
+				},
+				{
+					"section": "A02",
+					"days": "MWF",
+					"instructor": "Prof. 2",
+					"location": "Engineering Building",
+					"capacity": "85",
+					"time": {
+						"start": "1130",
+						"end": "1220"
+					}
+				}
+			]
+		}
+	]
+}
