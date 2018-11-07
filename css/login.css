@@ -3,10 +3,14 @@
   --um-brown-color: #68381a;
 }
 
+h1 {
+  padding-left: 10px;
+  margin-bottom: 50px;
+}
+
 #login-box {
   border-radius: 15px;
   border: 2px solid black;
-  padding: 5%;
   margin: auto;
   height: 50%;
   width: 50%;
