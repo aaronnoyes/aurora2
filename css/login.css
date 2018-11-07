@@ -14,7 +14,7 @@
 }
 
 .login-text-input {
-  margin: 10px 200px;
+  margin: 10px 30%;
   border-radius: 5px;
   border: 1px solid grey;
   padding-left: 5px;
@@ -26,10 +26,11 @@
 }
 
 #login-submit-button {
-  margin: 10px 200px;
+  margin: 10px 30%;
   border-radius: 5px;
   border: 1px solid var(--um-brown-color);
   background-color: var(--um-orange-color);
   color: var(--um-brown-color);
   font-weight: bold;
+  word-wrap: break-word;
 }
