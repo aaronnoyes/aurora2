@@ -6,9 +6,9 @@ import json
 import random
 
 # CONSTANTS
-course_html_path = './Fall2018.html'
-new_json_file_path = './Fall2018CourseList.json'
-term='FALL2018'
+course_html_path = './Winter2019.html'
+new_json_file_path = './Winter2019CourseList.json'
+term='WINTER2019'
 
 one_to_five = range(1, 6)
 one_to_one_hundred = range(1, 101)
@@ -16,17 +16,17 @@ one_to_one_hundred = range(1, 101)
 days_and_times = [{
     'days': 'MWF',
     'times': [
-        {'start': '0830', 'end': '0920'}, {'start': '0930', 'end': '1020'},
-        {'start': '1030', 'end': '1120'}, {'start': '1130', 'end': '1220'},
-        {'start': '1220', 'end': '1320'}, {'start': '1330', 'end': '1420'},
-        {'start': '1430', 'end': '1520'}, {'start': '1530', 'end': '1620'},
-        {'start': '1630', 'end': '1720'}]
+        {'start': '08:30', 'end': '09:20'}, {'start': '09:30', 'end': '10:20'},
+        {'start': '10:30', 'end': '11:20'}, {'start': '11:30', 'end': '12:20'},
+        {'start': '12:20', 'end': '13:20'}, {'start': '13:30', 'end': '14:20'},
+        {'start': '14:30', 'end': '15:20'}, {'start': '15:30', 'end': '16:20'},
+        {'start': '16:30', 'end': '17:20'}]
     }, {
     'days': 'TR',
     'times': [
-        {'start': '0830', 'end': '0945'}, {'start': '1000', 'end': '1115'},
-        {'start': '1130', 'end': '1245'}, {'start': '1300', 'end': '1415'},
-        {'start': '1430', 'end': '1545'}, {'start': '1600', 'end': '1715'}]
+        {'start': '08:30', 'end': '09:45'}, {'start': '10:00', 'end': '11:15'},
+        {'start': '11:30', 'end': '12:45'}, {'start': '13:00', 'end': '14:15'},
+        {'start': '14:30', 'end': '15:45'}, {'start': '16:00', 'end': '17:15'}]
     }]
 
 rooms = ['EITC E1', 'EITC E2', 'EITC E3', 'Buller', 'Tier', 'Armes', 'Biological Sciences',
