@@ -3,9 +3,12 @@
     <head>
         <title>Aurora V2</title>
         <meta charset="UTF-8"></meta>
-        
-        <!-- Local jQuery file -->
+
         <script src="../js/jquery-3.1.1.js"></script>
+        <script src="../js/moment.js"></script>
+        <script src="../js/fullcalendar.js"></script>
+        <script src="../js/init-calendar.js"></script>
+        <link rel="stylesheet" href="../css/fullcalendar.css">
 
         <!-- Bootstrap Minified CSS-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -14,9 +17,14 @@
         <!-- Bootstrap Compiled Javascript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
     </head>
     <body>
         <h1>AURORA V2</h1>
+
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10" id="calendar-schedule"></div>
+            <div class="col-lg-1"></div>
+        </div>
     </body>
 </html>
