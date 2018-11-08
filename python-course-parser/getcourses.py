@@ -5,9 +5,9 @@ import re
 import json
 import random
 
-# CONSTANTS
+# CONSTANts
 course_html_path = './Winter2019.html'
-new_json_file_path = './Winter2019CourseList.json'
+new_json_file_path = './Winter2019CourseList.js'
 term='WINTER2019'
 
 one_to_five = range(1, 6)
@@ -123,4 +123,4 @@ with open(course_html_path, 'r') as f:
 
 # Write object to file as JSON
 with open(new_json_file_path, 'w') as f:
-    f.write(json.dumps(course_list))
+    f.write(json.dumps(course_list, indent=1))
