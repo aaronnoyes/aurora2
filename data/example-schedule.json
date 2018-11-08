@@ -6,22 +6,22 @@
             "courseName": "Human Computer Interactions 1",
             "courseID": "COMP3020",
             "days": "MWF",
-            "term": "Fall 2018",
+            "term": "FALL2018",
             "section": "A01",
             "time": {
-                "start": "0930",
-                "end": "1020"
+                "start": "09:30",
+                "end": "10:20"
             }
         },
         {
             "courseName": "Introduction to Human Anatomy",
             "courseID": "BIOL1410",
             "days": "TR",
-            "term": "Fall 2018",
+            "term": "FALL2018",
             "section": "A05",
             "time": {
-                "start": "0830",
-                "end": "0945"
+                "start": "08:30",
+                "end": "09:45"
             }
         }
     ]

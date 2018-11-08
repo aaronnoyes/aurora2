@@ -52,6 +52,9 @@ $(document).ready(function() {
             right: 'prev,next'
         },
         defaultView: 'agendaWeek',
-        events: courses
+        events: courses,
+        eventClick: function(event) {
+            alert(event.title + " Information: Not available!");
+        }
     })
 });
