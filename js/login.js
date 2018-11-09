@@ -14,7 +14,7 @@ $(document).ready(function(){
   });
 
   $("#login-submit-button").click(function() {
-    document.location.href = "./home.html";
+    document.location.href = "./home-with-nav.html";
   });
 
 });
