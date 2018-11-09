@@ -1,0 +1,81 @@
+:root {
+  --um-orange-color: #f4a629;
+  --um-brown-color: #68381a;
+}
+
+h1 {
+  padding-left: 10px;
+  margin-bottom: 50px;
+}
+
+#search-filters {
+  border-radius: 15px;
+  border: 2px solid black;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-areas:
+    "term term-select department department-search"
+    "level level-select course-number course-search";
+}
+
+/* if screen size is too small, stack search options */
+@media only screen and (max-width: 768px) {
+	#search-box {
+    grid-template-areas:
+      "term term-select"
+      "department department-search"
+      "level level-select"
+      "course-number course-search";
+  }
+}
+
+select.dropwdown {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 2;
+  padding-left: 10px;
+
+  /* Positions background arrow image */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-position: 100% center;
+
+}
+
+#term {
+  grid-area: term;
+}
+
+#term-select {
+  grid-area: term-select;
+}
+
+#department {
+  grid-area: department;
+}
+
+#department-search {
+  grid-area: department-search;
+}
+
+#level {
+  grid-area: level;
+}
+
+#level-select {
+  grid-area: level-select;
+}
+
+#course-number {
+  grid-area: course-number;
+}
+
+#course-search {
+  grid-area: course-search;
+}
