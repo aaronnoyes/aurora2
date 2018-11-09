@@ -24,7 +24,7 @@ h1 {
 
 /* if screen size is too small, stack search options */
 @media only screen and (max-width: 768px) {
-	#search-box {
+	#search-filters {
     grid-template-areas:
       "term term-select"
       "department department-search"
