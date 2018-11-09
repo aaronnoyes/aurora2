@@ -1,4 +1,4 @@
-{
+var studentSchedule = {
     "name": "Daniel Lovegrove",
     "studentID": "1111111",
     "courses": [
