@@ -9,9 +9,45 @@ function convertDaysToNumbers(dayArray) {
     return dayArray.map(day => dayOfTheWeekToNumber[day]);
 }
 
+// List of events created from students courses.
+var calendarEvents = createFullCalendarEventsForSchedule(studentSchedule);
+
+function mockAddCourseToSchedule() {
+    var course = {
+        "name": "Practicum in ABA I",
+        "courseID": "ABA 0100",
+        "section": "A01",
+        "days": "TR",
+        "term": "FALL2018",
+        "time": {
+            "start": "10:30",
+            "end": "11:45"
+        }
+    };
+
+    addCourseToSchedule(studentSchedule, course);
+}
+
+/**
+ * Add a course to the student's schedule.
+ */
+function addCourseToSchedule(schedule, course) {
+    var conflictingCourses = getConflictingCourses(schedule, course);
+
+    if (conflictingCourses.length === 0) {
+        schedule.courses.push(JSON.parse(JSON.stringify(course)));
+        calendarEvents = createFullCalendarEventsForSchedule(studentSchedule);
+
+        $('#calendar-schedule').fullCalendar('removeEvents');
+        $('#calendar-schedule').fullCalendar('addEventSource', calendarEvents);
+    }
+    else {
+        alert('Couldn\'t add new course due to time conflict');
+    }
+}
+
 /**
  * Create a Full Calendar representation for a student's course schedule.
- * @param {schedule} schedule
  */
 function createFullCalendarEventsForSchedule(schedule) {
     let courseEvents = [];
@@ -31,9 +67,6 @@ function createFullCalendarEventsForSchedule(schedule) {
 
 /**
  * Create a list of events for a course that is between a start and an end date.
- * @param {Course} course
- * @param {moment} termStart
- * @param {moment} termEnd
  */
 function getCourseEventsBetweenDates(course, termStart, termEnd) {
     var eventList = [];
@@ -94,8 +127,9 @@ $(document).ready(function() {
             center: 'title',
             right: 'prev,next'
         },
+        height: 800,
         defaultView: 'agendaWeek',
-        events: createFullCalendarEventsForSchedule(studentSchedule),
+        events: calendarEvents,
         eventClick: function(event) {
             alert(event.title + " Information: Not available!");
         }

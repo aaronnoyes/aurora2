@@ -3,7 +3,7 @@ var studentSchedule = {
     "studentID": "1111111",
     "courses": [
         {
-            "courseName": "Human Computer Interactions 1",
+            "name": "Human Computer Interactions 1",
             "courseID": "COMP3020",
             "days": "MWF",
             "term": "FALL2018",
@@ -14,7 +14,7 @@ var studentSchedule = {
             }
         },
         {
-            "courseName": "Introduction to Human Anatomy",
+            "name": "Introduction to Human Anatomy",
             "courseID": "BIOL1410",
             "days": "TR",
             "term": "FALL2018",

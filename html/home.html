@@ -10,7 +10,8 @@
         <script src="../js/jquery-3.1.1.js"></script>
         <script src="../js/moment.js"></script>
         <script src="../js/fullcalendar.js"></script>
-        <script src="../js/init-calendar.js"></script>
+        <script src="../js/calendar-utils.js"></script>
+        <script src="../js/course-conflict.js"></script>
 
         <link rel="stylesheet" href="../css/fullcalendar.css">
 
@@ -27,8 +28,8 @@
 
         <div class="row">
             <div class="col-lg-1"></div>
-            <div class="col-lg-10" id="calendar-schedule"></div>
-            <div class="col-lg-1"></div>
+            <div class="col-lg-10" id="calendar-schedule" style="height:200px;"></div>
+            <button class="col-lg-1" onclick="mockAddCourseToSchedule()">Add a Course</button>
         </div>
     </body>
 </html>

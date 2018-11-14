@@ -13,17 +13,16 @@ function getConflictingCourses(currentSchedule, newCourse) {
         return conflictingClasses;
     }
 
-    for (var currentCourse in currentSchedule.courses) {
+    currentSchedule.courses.forEach(currentCourse => {
         if (isClassConflict(currentCourse, newCourse)) {
-            confictingClasses.push(currentCourse);
+            conflictingClasses.push(currentCourse);
         }
-    }
+    });
 
     return conflictingClasses;
 }
 
 function isClassConflict(currentCourse, newCourse) {
-    // Classes conflict if they are in the same term, on the same day, at the same time
     return isTermConflict(currentCourse, newCourse) &&
         isDayConflict(currentCourse, newCourse)	&&
         isTimeConflict(currentCourse, newCourse);
@@ -34,26 +33,22 @@ function isTermConflict(currentCourse, newCourse) {
 }
 
 function isDayConflict(currentCourse, newCourse) {
-    var dayConflict = false;
     var currentCourseDays = currentCourse.days.split('');
     var newCourseDays = newCourse.days.split('');
 
-    for (var newCourseDay in newCourseDays) {
-        if (currentCourseDays.includes(newCourseDay)) {
-            dayConflict = true;
-            break;
-        }
+    if (newCourseDays.some(x => currentCourseDays.includes(x))) {
+        return true;
+    } else {
+        return false;
     }
-
-    return dayConflict;
 }
 
 function isTimeConflict(currentCourse, newCourse) {
-    newCourseStartTime = parseInt(newCourse.time.start);
-    newCourseEndTime = parseInt(newCourse.time.end);
+    newCourseStartTime = parseInt(newCourse.time.start.replace(':', ''));
+    newCourseEndTime = parseInt(newCourse.time.end.replace(':', ''));
 
-    currentCourseStartTime = parseInt(currentCourse.time.start);
-    currentCourseEndTime = parseInt(currentCourse.time.end);
+    currentCourseStartTime = parseInt(currentCourse.time.start.replace(':', ''));
+    currentCourseEndTime = parseInt(currentCourse.time.end.replace(':', ''));
 
     // Conflict if start time of new course is in current course time range, OR
     // if end time of new course is in current course time range, OR
