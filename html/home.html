@@ -22,6 +22,42 @@
         <script src="../js/course-registration.js"></script>
         <script src="../js/init-calendar.js"></script>
         <script src="../js/personal-info.js"></script>
+
+        <!-- Javascript testing and playing around. To be removed before handing in code -->
+        <script>
+        function mockAddCourseToSchedule() {
+            var course = {
+                "name": "Practicum in ABA I",
+                "courseID": "ABA 0100",
+                "section": "A01",
+                "days": "TR",
+                "term": "FALL2018",
+                "time": {
+                    "start": "10:30",
+                    "end": "11:45"
+                }
+            };
+
+            addCourseToSchedule(studentData, course);
+        }
+
+        function mockChangeSecurityQuestion() {
+            var message = "BEFORE\n";
+            message += "Question 1: " + studentData.securityQuestions[0].question + "\n";
+            message += "Question 2: " + studentData.securityQuestions[1].question + "\n";
+            message += "Question 3: " + studentData.securityQuestions[2].question + "\n\n";
+
+            // Changes first question to the second question
+            updateSecurityQuestion("What is the name of your first pet?", "What is your favourite colour?");
+
+            message += "AFTER\n";
+            message += "Question 1: " + studentData.securityQuestions[0].question + "\n";
+            message += "Question 2: " + studentData.securityQuestions[1].question + "\n";
+            message += "Question 3: " + studentData.securityQuestions[2].question + "\n";
+
+            alert(message);
+        }
+        </script>
     </head>
     <body>
         <h1>AURORA V2</h1>
@@ -29,7 +65,10 @@
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-10" id="calendar-schedule" style="height:200px;"></div>
-            <button class="col-lg-1" onclick="mockAddCourseToSchedule()">Add a Course</button>
+            <div class="col-lg-1">
+                <button onclick="mockAddCourseToSchedule()">Add a Course</button>
+                <button onclick="mockChangeSecurityQuestion()">Change security question</button>
+            </div>
         </div>
     </body>
 </html>

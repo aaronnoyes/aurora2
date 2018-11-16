@@ -73,22 +73,6 @@ function isTimeConflict(currentCourse, newCourse) {
         (newCourseStartTime <= currentCourseStartTime && newCourseEndTime >= currentCourseEndTime);
 }
 
-function mockAddCourseToSchedule() {
-    var course = {
-        "name": "Practicum in ABA I",
-        "courseID": "ABA 0100",
-        "section": "A01",
-        "days": "TR",
-        "term": "FALL2018",
-        "time": {
-            "start": "10:30",
-            "end": "11:45"
-        }
-    };
-
-    addCourseToSchedule(studentData, course);
-}
-
 /**
  * Add a course to the student's schedule.
  */
