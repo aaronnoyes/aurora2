@@ -163,3 +163,22 @@ function getCourseEventsBetweenDates(course, termStart, termEnd) {
 
     return eventList;
 }
+
+/**
+ * Get a list of all the departments for a specific term.
+ */
+function getUniqueDepartments(term) {
+    var departmentList = [];
+
+    if (term === "FALL2018") {
+        departmentList = Array.from(new Set(fall2018Courses.courses.map(course => course.department)));
+        departmentList.sort();
+    } else if (term === "WINTER2019") {
+        departmentList = Array.from(new Set(winter2019Courses.courses.map(course => course.department)));
+        departmentList.sort();
+    } else {
+        console.error("Term " + term + " is not supported.");
+    }
+
+    return departmentList;
+}
