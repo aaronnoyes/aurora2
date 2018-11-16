@@ -1,23 +1,34 @@
 //
-// Functionality associated with registering for courses
+// Functionality associated with student's schedule and registering for courses
 //
+
+var fall2018TermStart = moment('2018-09-05');
+var fall2018TermEnd = moment('2018-12-07');
+var winter2019TermStart = moment('2019-01-07');
+var winter2019TermEnd = moment('2019-04-09');
+
+var calendarEvents = [];
+
+const dayOfTheWeekToNumber = {"U": 0, "M": 1, "T": 2, "W": 3, "R": 4, "F": 5, "S": 6};
+
+function convertDaysToNumbers(dayArray) {
+    return dayArray.map(day => dayOfTheWeekToNumber[day]);
+}
+
 
 /**
  * Get all of the courses in the user's schedule that conflict with the course to be registered
  * for.
- *
- * @param {Schedule} currentSchedule
- * @param {Course} newCourse
  * @returns {Course[]} List of courses that conflict with new course. Empty if no conflicts.
  */
-function getConflictingCourses(currentSchedule, newCourse) {
+function getConflictingCourses(student, newCourse) {
     var conflictingClasses = [];
 
-    if (currentSchedule === null || currentSchedule === undefined) {
+    if (student === null || student === undefined) {
         return conflictingClasses;
     }
 
-    currentSchedule.courses.forEach(currentCourse => {
+    student.enrolledCourses.forEach(currentCourse => {
         if (isClassConflict(currentCourse, newCourse)) {
             conflictingClasses.push(currentCourse);
         }
@@ -62,19 +73,6 @@ function isTimeConflict(currentCourse, newCourse) {
         (newCourseStartTime <= currentCourseStartTime && newCourseEndTime >= currentCourseEndTime);
 }
 
-
-var fall2018TermStart = moment('2018-09-05');
-var fall2018TermEnd = moment('2018-12-07');
-var winter2019TermStart = moment('2019-01-07');
-var winter2019TermEnd = moment('2019-04-09');
-
-var calendarEvents = [];
-
-const dayOfTheWeekToNumber = {"U": 0, "M": 1, "T": 2, "W": 3, "R": 4, "F": 5, "S": 6};
-function convertDaysToNumbers(dayArray) {
-    return dayArray.map(day => dayOfTheWeekToNumber[day]);
-}
-
 function mockAddCourseToSchedule() {
     var course = {
         "name": "Practicum in ABA I",
@@ -88,18 +86,18 @@ function mockAddCourseToSchedule() {
         }
     };
 
-    addCourseToSchedule(studentSchedule, course);
+    addCourseToSchedule(studentData, course);
 }
 
 /**
  * Add a course to the student's schedule.
  */
-function addCourseToSchedule(schedule, course) {
-    var conflictingCourses = getConflictingCourses(schedule, course);
+function addCourseToSchedule(student, course) {
+    var conflictingCourses = getConflictingCourses(student, course);
 
     if (conflictingCourses.length === 0) {
-        schedule.courses.push(JSON.parse(JSON.stringify(course)));
-        calendarEvents = createFullCalendarEventsForSchedule(studentSchedule);
+        student.enrolledCourses.push(JSON.parse(JSON.stringify(course)));
+        calendarEvents = createFullCalendarEventsForSchedule(studentData);
 
         $('#calendar-schedule').fullCalendar('removeEvents');
         $('#calendar-schedule').fullCalendar('addEventSource', calendarEvents);
@@ -112,10 +110,10 @@ function addCourseToSchedule(schedule, course) {
 /**
  * Create a Full Calendar representation for a student's course schedule.
  */
-function createFullCalendarEventsForSchedule(schedule) {
+function createFullCalendarEventsForSchedule(student) {
     let courseEvents = [];
 
-    schedule.courses.forEach(studentCourse =>  {
+    student.enrolledCourses.forEach(studentCourse =>  {
         if (studentCourse.term === "FALL2018") {
             courseEvents = courseEvents.concat(getCourseEventsBetweenDates(studentCourse, fall2018TermStart, fall2018TermEnd));
         } else if (studentCourse.term === "WINTER2019") {

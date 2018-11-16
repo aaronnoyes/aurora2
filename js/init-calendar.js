@@ -11,7 +11,7 @@ $(document).ready(function() {
         },
         height: 800,
         defaultView: 'agendaWeek',
-        events: createFullCalendarEventsForSchedule(studentSchedule),
+        events: createFullCalendarEventsForSchedule(studentData),
         eventClick: function(event) {
             alert(event.title + " Information: Not available!");
         }

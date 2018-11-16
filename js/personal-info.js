@@ -10,7 +10,7 @@
  * @param {string} newQuestion: The new question the user is updating to
  */
 function updateSecurityQuestion(oldQuestion, newQuestion) {
-    student.securityQuestions.forEach(securityQuestion => {
+    studentData.securityQuestions.forEach(securityQuestion => {
         if (securityQuestion.question === oldQuestion) {
             securityQuestion.question = newQuestion;
         }
