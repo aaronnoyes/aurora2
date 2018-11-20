@@ -1,0 +1,14 @@
+.overflowing-header {
+  position: relative;
+  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.banner {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.site-header {
+  padding-bottom: 20px;
+}
