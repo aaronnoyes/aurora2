@@ -61,7 +61,7 @@ $(document).ready(function(){
   function filterCourses() {
     var courseNumber = "";
     var courseName = "";
-    li = $('li').toArray();
+    li = $('li.search-result').toArray();
 
     for (i = 0; i < li.length; i++) {
       courseName = li[i].innerHTML.toUpperCase();
@@ -85,7 +85,7 @@ $(document).ready(function(){
   function appendAllCourses(courseList) {
     //loop through each course in list
     for(var i=0; i < courseList.length; i++) {
-      $('#course-list').append('<li>'+courseList[i].courseID+'</li>');
+      $('#course-list').append('<li class="search-result">'+courseList[i].courseID+'</li>');
     }
   }
 
