@@ -5,7 +5,8 @@ $(document).ready(function(){
   var workingCourseList = fullWinterCourseList;
   var searchTerm = "";
   var re = new RegExp('.*');
-  var activeResult = null;
+  var buttonIdRegex = new RegExp(/BUTTON\-/)
+  var activeDropdown = null;
 
 
   //hot udpate search filter
@@ -20,11 +21,11 @@ $(document).ready(function(){
     $('#course-list').empty();
 
     if ($(this).val() == "w2019") {
-      appendAllCourses(fullWinterCourseList);
+      appendCoursesToList(fullWinterCourseList);
       workingCourseList = fullWinterCourseList;
     }
     else {
-      appendAllCourses(fullFallCourseList);
+      appendCoursesToList(fullFallCourseList);
       workingCourseList = fullFallCourseList;
     }
 
@@ -56,7 +57,8 @@ $(document).ready(function(){
         re = new RegExp('[4][0-9]{3}');
         break;
       default:
-        re = new RegExp('.*');;
+        re = new RegExp('.*');
+
     }
 
     filterCourses();
@@ -65,68 +67,60 @@ $(document).ready(function(){
   function filterCourses() {
     var courseNumber = "";
     var courseName = "";
-    li = $('div.search-result').toArray();
+    courseListItems = $('div.search-result').toArray();
 
-    for (i = 0; i < li.length; i++) {
-      courseName = li[i].id.toUpperCase();
+    courseListItems.forEach(courseItem => {
+      courseName = courseItem.id.toUpperCase();
       courseNumber = courseName.substr(courseName.length - 4);
-      // console.log("*NAME: " + courseName);
-      // console.log("*NUMBER: " + courseNumber);
 
       if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1){
-        li[i].style.display = "";
-        // console.log("\t MATCHES")
+        courseItem.style.display = "";
       }
       else {
-        li[i].style.display = "none";
-        // console.log("\t DOES NOT MATCH")
+        courseItem.style.display = "none";
       }
-
-    }
-  }
-
-  //add all courses to the ul
-  function appendAllCourses(courseList) {
-    //loop through each course in list
-    for(var i=0; i < courseList.length; i++) {
-      $('#course-list').append('<div class="search-result" id="' + courseList[i].courseID +'">' +
-      '<h5 class="search-result-title">' + courseList[i].courseID + ': </h5>' +
-      courseList[i].name +
-      '<div class="expanded-placeholder">' +
-      courseList[i].department + '</br>' +
-      courseList[i].credits + '</br>' +
-      '</div>' +
-      '<button class="view-button">View' +
-      '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>' +
-      '</button>' +
-      '</div>');
-    }
-    refreshEventListener(); //weird weird weird
-  }
-
-  //must be called after adding list elements because it is an async operation
-  function refreshEventListener() {
-    // Remove handler from existing elements
-    $(".view-button").off();
-
-    // Re-add event handler for all matching elements
-    $(".view-button").on("click", function() {
-      // var parentID = $(this).closest('div').attr('id');
-      // var selectedCourse = workingCourseList.find(function(element) {
-      //   return element.courseID == parentID;
-      // });
-      // console.log(selectedCourse);
-      console.log($(this).siblings()[1]);
-      if(activeResult != null) {
-        $(activeResult).removeClass("active");
-      }
-      activeResult = $(this).siblings()[1];
-      console.log(activeResult);
-      $(activeResult).addClass("active");
     });
   }
 
-  appendAllCourses(fullWinterCourseList);
+  function appendCoursesToList(courseList) {
+    courseList.forEach(course => {
+      $('#course-list').append(getCourseMarkup(course));
+    });
+  }
 
+  function getCourseMarkup(course) {
+    // IDs are not allowed to have spaces in them
+    var courseIDNoSpaces = course.courseID.replace(' ', '');
 
+    return `
+      <div class="search-result" id="${courseIDNoSpaces}">
+        <h5 class="search-result-title">${course.courseID}: ${course.name}</h5>
+        <div class="expanded-placeholder" id="DROPDOWN-${courseIDNoSpaces}">
+          <span>Department: ${course.department}</span>
+          <br/>
+          <span>Credits: ${course.credits}</span>
+          <br/>
+        </div>
+        <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
+          View <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>
+        </button>
+      </div>`
+  }
+
+  // Handles buttons being clicked
+  $('ul#course-list').on('click', function(e) {
+    if (buttonIdRegex.test(e.target.id)) {
+      var dropdownIdSelector = `#${e.target.id.replace('BUTTON-', 'DROPDOWN-')}`;
+
+      if(activeDropdown != null) {
+        $(activeDropdown).removeClass("active");
+      }
+
+      activeDropdown = dropdownIdSelector;
+
+      $(activeDropdown).addClass("active");
+    }
+  });
+
+  appendCoursesToList(workingCourseList);
 });
