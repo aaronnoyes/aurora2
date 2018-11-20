@@ -2,14 +2,14 @@
 <html>
 
 <head>
-  <title>Iris</title>
+  <title>UM Iris</title>
   <meta charset="UTF-8">
   </meta>
 
   <script src="../lib/jquery-3.1.1.js"></script>
   <script src="../lib/moment.js"></script>
   <script src="../lib/fullcalendar.js"></script>
-  <script src="../js/init-calendar-test.js"></script>
+  <script src="../js/init-calendar.js"></script>
   <link rel="stylesheet" href="../lib/fullcalendar.css">
 
   <!-- home css file -->
@@ -17,6 +17,9 @@
 
   <!-- search css file -->
   <link rel="stylesheet" type="text/css" href="../css/search.css">
+
+  <!-- common css file -->
+  <link rel="stylesheet" type="text/css" href="../css/common.css">
 
   <!-- Bootstrap Minified CSS-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -32,8 +35,17 @@
   <!-- winter courses json data -->
   <script src="../data/Winter2019CourseList.js"></script>
 
+  <!-- student object -->
+  <script src="../data/student-obj.js"></script>
+
   <!-- search js file -->
   <script src="../js/search.js"></script>
+
+  <!-- Course registration functionality -->
+  <script src="../js/course-registration.js"></script>
+
+  <!-- Personal information functionality -->
+  <script src="../js/personal-info.js"></script>
 
   <!-- override bs nav colors -->
   <style>
@@ -52,17 +64,11 @@
 </head>
 
 <body>
-  <div class="page-header">
-    <div class="row">
-      <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
-        <h1>UM Iris</h1>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-          <form method="GET" action="login.html">
-            <button type="submit" class="btn btn-default navbar-btn pull-right">Sign Out</button>
-          </form>
-      </div>
+  <div class="site-header">
+    <div class="overflowing-header">
+      <img class="banner" src="../data/banner.png">
     </div>
+  </div>
 
     <div class="center-pills">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -78,6 +84,11 @@
           <a class="nav-link" id="pills-personal-tab" data-toggle="pill" href="#pills-personal" role="tab"
             aria-controls="pills-personal" aria-selected="false">Personal Info</a>
         </li>
+        <li class="pull-right">
+          <form method="GET" action="login.html">
+            <button type="submit" class="btn btn-default navbar-btn pull-right">Sign Out</button>
+          </form>
+        </li>
       </ul>
     </div>
 
@@ -87,10 +98,12 @@
 
     <!-- schedule -->
     <div class="tab-pane fade show active" id="pills-schedule" role="tabpanel" aria-labelledby="pills-schedule-tab">
-      <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10" id="calendar-schedule"></div>
-        <div class="col-lg-1"></div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-10" id="calendar-schedule"></div>
+          <div class="col-lg-1"></div>
+        </div>
       </div>
     </div>
 

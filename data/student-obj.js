@@ -15,7 +15,7 @@ var studentData = {
     enrolledCourses: [
         {
             name: "Human Computer Interactions 1",
-            courseID: "COMP3020",
+            courseID: "COMP 3020",
             days: "MWF",
             term: "FALL2018",
             section: "A01",
@@ -26,7 +26,7 @@ var studentData = {
         },
         {
             name: "Introduction to Human Anatomy",
-            courseID: "BIOL1410",
+            courseID: "BIOL 1410",
             days: "TR",
             term: "FALL2018",
             section: "A05",
