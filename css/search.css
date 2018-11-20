@@ -24,6 +24,14 @@ h5 {
   border: none;
 }
 
+.expanded-placeholder {
+  display: none;
+}
+
+.expanded-placeholder.active {
+  display: block;
+}
+
 .box {
   border-radius: 15px;
   border: 2px solid black;
