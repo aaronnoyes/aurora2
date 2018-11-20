@@ -75,7 +75,7 @@ def get_course_sections(course_level):
 
 def get_lab_sections(num_labs):
     """
-    Returns a randomized number of lab sections with a 80% chance of no lab sections for a course.
+    Returns a randomized number of lab sections with a 85% chance of no lab sections for a course.
     """
     n = random.choice(one_to_one_hundred)
 
@@ -88,39 +88,58 @@ def get_lab_sections(num_labs):
 
 # START OF PROCESSING
 with open(course_html_path, 'r') as f:
-    soup = BeautifulSoup(f, 'html.parser')
 
-    departmentRegex = re.compile('Department')
+    soup = BeautifulSoup(f, 'html.parser')
 
     course_list = {'term': term, 'courses': []}
 
-    for title_tag in soup.find_all('td', class_='nttitle'):
-        # Get the course id and name
-        title = title_tag.text
-        title_split = title.split(' - ')
-        course_id = title_split[0] or 'N/A'
-        course_name = title_split[1] or 'N/A'
-        course_level = int(course_id.split(' ')[1][0])
+    curr_department = ''
+    curr_course_id = ''
+    curr_course_name = ''
+    curr_course_credits = ''
+    count = 0
 
-        # Get the department
-        department_raw = title_tag.findNext(text=departmentRegex)
-        if len(str(department_raw)) > 70: # Filter out descriptions with the word Department in them
-            department_raw = department_raw.findNext(text=departmentRegex)
-        department = str(department_raw).replace('\n', '').replace('Department', '').rstrip()
+    for dd_item in soup.find_all(class_=re.compile('(ddheader|dddefault)')):
+        # Header has department name
+        if dd_item.name == 'th':
+            curr_department = dd_item.text
+            count = 0
 
-        # Get course and lab sections
-        course_sections = get_course_sections(course_level)
-        lab_sections = get_lab_sections(len(course_sections))
+        # Each sequential set of 4 tags have course information
+        else:
+            if count == 0:
+                curr_course_id = dd_item.text
+                count += 1
 
-        # Create course object
-        new_course = {'name': course_name, 'courseID': course_id, 'department': department}
-        new_course['sections'] = course_sections
-        if len(lab_sections) != 0:
-            new_course['labSections'] = lab_sections
+            elif count == 1:
+                curr_course_id = '{0} {1}'.format(curr_course_id, dd_item.text)
+                count += 1
 
-        # Append course to course list
-        course_list['courses'].append(new_course)
+            elif count == 2:
+                curr_course_name = dd_item.text
+                count += 1
+
+            elif count == 3:
+                curr_course_credits = dd_item.text
+
+                new_course = {
+                    'name': curr_course_name,
+                    'courseID': curr_course_id,
+                    'department': curr_department,
+                    'credits': curr_course_credits
+                }
+
+                # Get course and lab sections
+                curr_course_level = int(curr_course_id.split(' ')[1][0])
+                course_sections = get_course_sections(curr_course_level)
+                lab_sections = get_lab_sections(len(course_sections))
+                new_course['sections'] = course_sections
+                if len(lab_sections) != 0:
+                    new_course['labSections'] = lab_sections
+
+                course_list['courses'].append(new_course)
+                count = 0
 
 # Write object to file as JSON
 with open(new_json_file_path, 'w') as f:
-    f.write(json.dumps(course_list, indent=1))
+    f.write(json.dumps(course_list, indent=1, ensure_ascii=False))
