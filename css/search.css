@@ -36,10 +36,10 @@ h5 {
 }
 
 .search-result {
-  border-bottom: 1px solid black;
-  padding: 10px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, .3);
+  padding: 15px;
   position: relative;
-  height: 75px;
+  min-height: 75px;
   margin-top: 10px;
 }
 

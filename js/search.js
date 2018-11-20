@@ -2,10 +2,11 @@ $(document).ready(function(){
 
   var fullFallCourseList = fall2018Courses.courses;
   var fullWinterCourseList = winter2019Courses.courses;
-  var workingCourseList = [];
+  var workingCourseList = fullWinterCourseList;
   var searchTerm = "";
   var re = new RegExp('.*');
   var activeResult = "";
+
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
@@ -20,9 +21,11 @@ $(document).ready(function(){
 
     if ($(this).val() == "w2019") {
       appendAllCourses(fullWinterCourseList);
+      workingCourseList = fullWinterCourseList;
     }
     else {
       appendAllCourses(fullFallCourseList);
+      workingCourseList = fullFallCourseList;
     }
 
     filterCourses();
@@ -89,15 +92,31 @@ $(document).ready(function(){
       $('#course-list').append('<div class="search-result" id="' + courseList[i].courseID +'">' +
       '<h5 class="search-result-title">' + courseList[i].courseID + ': </h5>' +
       courseList[i].name +
+      '<div class"expanded-placeholder"></div>' +
       '<button class="view-button">View' +
       '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>' +
       '</button>' +
       '</div>');
     }
+    refreshEventListener(); //weird weird weird
+  }
+
+  //must be called after adding list elements because it is an async operation
+  function refreshEventListener() {
+    // Remove handler from existing elements
+    $(".view-button").off();
+
+    // Re-add event handler for all matching elements
+    $(".view-button").on("click", function() {
+      var parentID = $(this).closest('div').attr('id');
+      var selectedCourse = workingCourseList.find(function(element) {
+        return element.courseID == parentID;
+      });
+      console.log(selectedCourse);
+    });
   }
 
   appendAllCourses(fullWinterCourseList);
-
 
 
 });
