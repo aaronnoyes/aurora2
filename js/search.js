@@ -5,6 +5,7 @@ $(document).ready(function(){
   var workingCourseList = [];
   var searchTerm = "";
   var re = new RegExp('.*');
+  var activeResult = "";
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
@@ -61,10 +62,10 @@ $(document).ready(function(){
   function filterCourses() {
     var courseNumber = "";
     var courseName = "";
-    li = $('li.search-result').toArray();
+    li = $('div.search-result').toArray();
 
     for (i = 0; i < li.length; i++) {
-      courseName = li[i].innerHTML.toUpperCase();
+      courseName = li[i].id.toUpperCase();
       courseNumber = courseName.substr(courseName.length - 4);
       // console.log("*NAME: " + courseName);
       // console.log("*NUMBER: " + courseNumber);
@@ -85,7 +86,13 @@ $(document).ready(function(){
   function appendAllCourses(courseList) {
     //loop through each course in list
     for(var i=0; i < courseList.length; i++) {
-      $('#course-list').append('<li class="search-result">'+courseList[i].courseID+'</li>');
+      $('#course-list').append('<div class="search-result" id="' + courseList[i].courseID +'">' +
+      '<h5 class="search-result-title">' + courseList[i].courseID + ': </h5>' +
+      courseList[i].name +
+      '<button class="view-button">View' +
+      '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>' +
+      '</button>' +
+      '</div>');
     }
   }
 
