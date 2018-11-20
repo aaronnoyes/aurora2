@@ -4,38 +4,27 @@ $(document).ready(function(){
   var fullWinterCourseList = winter2019Courses.courses;
   var workingCourseList = [];
   var searchTerm = "";
+  var re = new RegExp('.*');
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
       searchTerm = $(this).val().toUpperCase();
-      console.log(searchTerm);
 
-      li = $('li').toArray();
-
-      for (i = 0; i < li.length; i++) {
-        if (li[i].innerHTML.toUpperCase().indexOf(searchTerm) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-      }
+      filterCourses();
   });
 
   //change search term
   $("#term-select").change(function () {
     $('#course-list').empty();
 
-    console.log($(this).val());
-    console.log("term select changed, cleared course list")
-
     if ($(this).val() == "w2019") {
       appendAllCourses(fullWinterCourseList);
-      console.log('added winter courses');
     }
     else {
       appendAllCourses(fullFallCourseList);
-      console.log('added fall courses');
     }
+
+    filterCourses();
   });
 
   //changed course level
@@ -44,9 +33,7 @@ $(document).ready(function(){
     console.log($(this).val());
     var level = $(this).val()[0];
     // var lastFive = id.substr(id.length - 5);
-    var courseNumber = "";
-    var courseName = "";
-    var re = new RegExp('');
+
 
     switch (level) {
       case "0":
@@ -65,24 +52,34 @@ $(document).ready(function(){
         re = new RegExp('[4][0-9]{3}');
         break;
       default:
-        re = re = new RegExp('*');;
+        re = new RegExp('.*');;
     }
 
+    filterCourses();
+  });
+
+  function filterCourses() {
+    var courseNumber = "";
+    var courseName = "";
     li = $('li').toArray();
 
     for (i = 0; i < li.length; i++) {
       courseName = li[i].innerHTML.toUpperCase();
       courseNumber = courseName.substr(courseName.length - 4);
+      // console.log("*NAME: " + courseName);
+      // console.log("*NUMBER: " + courseNumber);
 
-      if(!re.test(courseNumber)) {
-        li[i].style.display = "none";
+      if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1){
+        li[i].style.display = "";
+        // console.log("\t MATCHES")
       }
       else {
-        li[i].style.display = "";
+        li[i].style.display = "none";
+        // console.log("\t DOES NOT MATCH")
       }
 
     }
-  });
+  }
 
   //add all courses to the ul
   function appendAllCourses(courseList) {
