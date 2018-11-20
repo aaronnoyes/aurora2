@@ -8,10 +8,22 @@ h1 {
   margin-bottom: 50px;
 }
 
-#search-filters {
+.box {
   border-radius: 15px;
   border: 2px solid black;
   padding: 10px;
+  margin-top: 10px;
+}
+
+#course-list {
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+#search-filters {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
@@ -20,6 +32,10 @@ h1 {
   grid-template-areas:
     "term term-select department department-search"
     "level level-select course-number course-search";
+}
+
+#course-list {
+
 }
 
 /* if screen size is too small, stack search options */
