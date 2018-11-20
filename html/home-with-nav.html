@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Aurora V2</title>
+  <title>Iris</title>
   <meta charset="UTF-8">
   </meta>
 
@@ -15,6 +15,9 @@
   <!-- home css file -->
   <link rel="stylesheet" type="text/css" href="../css/home.css">
 
+  <!-- search css file -->
+  <link rel="stylesheet" type="text/css" href="../css/search.css">
+
   <!-- Bootstrap Minified CSS-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
@@ -22,6 +25,15 @@
   <!-- Bootstrap Compiled Javascript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
+
+  <!-- fall courses json data -->
+  <script src="../data/Fall2018CourseList.js"></script>
+
+  <!-- winter courses json data -->
+  <script src="../data/Winter2019CourseList.js"></script>
+
+  <!-- search js file -->
+  <script src="../js/search.js"></script>
 
   <!-- override bs nav colors -->
   <style>
@@ -43,10 +55,12 @@
   <div class="page-header">
     <div class="row">
       <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
-        <h1>AURORA v2</h1>
+        <h1>UM Iris</h1>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-        <button type="button" class="btn btn-default navbar-btn pull-right">Sign Out</button>
+          <form method="GET" action="login.html">
+            <button type="submit" class="btn btn-default navbar-btn pull-right">Sign Out</button>
+          </form>
       </div>
     </div>
 
@@ -69,6 +83,9 @@
 
   </div>
   <div class="tab-content" id="pills-tabContent">
+
+
+    <!-- schedule -->
     <div class="tab-pane fade show active" id="pills-schedule" role="tabpanel" aria-labelledby="pills-schedule-tab">
       <div class="row">
         <div class="col-lg-1"></div>
@@ -76,32 +93,49 @@
         <div class="col-lg-1"></div>
       </div>
     </div>
+
+
+    <!-- search -->
     <div class="tab-pane fade" id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
-          <div id="search-filters" class="col-lg-6 col-md-6 col-sm-8 col-xs-10">
-            <h4 id="term">Term</h3>
-              <select id="term-select" class="dropwdown">
-                <option value="w2019">Winter 2019</option>
-                <option value="f2018">Fall 2018</option>
-              </select>
-              <h4 id="department">Department</h3>
-                <input id="department-search" type="text"></input>
-                <h4 id="level">Level</h4>
-                <select id="level-select" class="dropwdown">
-                  <option value="1000">1000</option>
-                  <option value="2000">2000</option>
-                  <option value="3000">3000</option>
-                  <option value="4000">4000</option>
-                </select>
-                <h4 id="course-number">Course Search</h4>
-                <input id="course-search" type="text"></input>
+          <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+              <div id="search-filters" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                  <h4 id="term">Term</h3>
+                  <select id="term-select" class="dropwdown">
+                    <option value="w2019">Winter 2019</option>
+                    <option value="f2018">Fall 2018</option>
+                  </select>
+                  <h4 id="department">Department</h3>
+                  <input id="department-search" type="text"></input>
+                  <h4 id="level">Level</h4>
+                  <select id="level-select" class="dropwdown">
+                    <option value="all">ALL</option>
+                    <option value="0000">0000</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
+                    <option value="3000">3000</option>
+                    <option value="4000">4000</option>
+                  </select>
+                  <h4 id="course-number">Course Search</h4>
+                  <input id="course-search" type="text"></input>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
-        </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+            <div id="search-results" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                <ul id="course-list">
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+          </div>
       </div>
     </div>
+
+
+
+    <!-- personal -->
     <div class="tab-pane fade" id="pills-personal" role="tabpanel" aria-labelledby="pills-personal-tab">
       <div class="container-fluid">
         <div class="row">
@@ -240,8 +274,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
   </div>
 </body>
