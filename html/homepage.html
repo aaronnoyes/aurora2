@@ -12,12 +12,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 
-    <!-- home css file
-    <link rel="stylesheet" type="text/css" href="../css/home.css"> -->
+    <!-- home css file -->
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
 
     <!-- Bootstrap Compiled Javascript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
+    <style>
+        .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+            color: var(--um-brown-color);
+            background-color: var(--um-orange-color);
+        }
+        .nav-pills>li>a {
+            color: var(--um-brown-color);
+        }
+  
+        .nav-pills {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,11 +44,12 @@
              <button type="button" class="btn btn-default navbar-btn pull-right">Sign Out</button>
         </div>
     </div>
+</div>
 
-
+<!--Navigation Bar-->
     <div class="container-fluid">
         <div class="row">
-                <ul class="nav nav-tabs" id="navigation-Tab" role="tablist">
+                <ul class="nav nav-pills nav-tabs" id="navigation-Tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link" id="shedule-tab" data-toggle="tab" href="#schedule" role="tab"
                             aria-controls="schedule" aria-selected="false">Schedule</a>
@@ -43,8 +58,8 @@
                         <a class="nav-link" id="course-tab" data-toggle="tab" href="#course" role="tab" aria-controls="course"
                             aria-selected="false">Search Courses</a>
                     </li>
-                    <li class="nav-item in active">
-                        <a class="nav-link active" id="personalInfo-tab" data-toggle="tab" href="#personalInfo" role="tab"
+                    <li class="nav-item">
+                        <a class="nav-link in active" id="personalInfo-tab" data-toggle="tab" href="#personalInfo" role="tab"
                             aria-controls="personalInfo" aria-selected="true">Personal Info</a>
                     </li>
                 </ul>
