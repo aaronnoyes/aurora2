@@ -234,6 +234,8 @@ $(document).ready(function(){
       var student = studentData;
       var cID = e.target.id.split("-")[0];
       var sID = e.target.id.split("-")[3];
+      //.prop("disabled", true)
+      $(`#${cID}-register-btn-${sID}`).prop("disabled", true)
 
 
       var formattedCourse = getCourse(cID, sID);
