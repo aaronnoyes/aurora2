@@ -23,7 +23,7 @@ function displaySecurityQuestion(){
         var question = studentData.securityQuestions[i];
         var opt = document.createElement("option");
         var text = document.createTextNode(question);
-        opt.appendChild(question);
+        opt.appendChild(text);
         select.appendChild(opt);
     }
 }
