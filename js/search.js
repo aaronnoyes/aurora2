@@ -170,6 +170,8 @@ $(document).ready(function(){
   function initSectionSelectVisibility(id) {
     var first = true;
     sectionDivs = $(`#${id}-section-select`).parent().parent().siblings("div.section-div");
+    console.log(id);
+    console.log($(`#${id}-section-select`))
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(first) sectionDivs[i].style.display = "";
@@ -198,7 +200,7 @@ $(document).ready(function(){
       if(activeDropdown != null) {
         $(activeDropdown).removeClass("active");
         $(activeDropdown).siblings("button").html("View");
-        $(activeDropdown).children("div").remove(); //remove sections from div
+        $(activeDropdown).children("div.section-div").remove(); //remove sections from div
       }
 
       if(activeDropdown != dropdownIdSelector) {
