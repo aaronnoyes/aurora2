@@ -104,13 +104,15 @@ $(document).ready(function(){
           <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
             ${generateSectionsOptions(course.sections)}
           </select>
+          <br/>
         </div>
         <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
-          View <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>
+          View
         </button>
       </div>`
   }
 
+  //generate the dropdown options for course sections
   function generateSectionsOptions(sections) {
     var options = "";
     for(var i=0; i<sections.length; i++) {
@@ -119,18 +121,52 @@ $(document).ready(function(){
     return options;
   }
 
+  //generate the info for each section in course
+  function generateSectionsDivs(sections, id) {
+    var sectionsDiv = ""
+    for(var i=0; i<sections.length; i++) {
+      sectionsDiv += generateSectionDiv(sections[i], id);
+    }
+    return sectionsDiv;
+  }
+
+  //generate info for an individual course section
+  function generateSectionDiv(section, id) {
+    return `
+    <div id="${id}-section-${section.section}" class="section-div">
+      <span>Days: ${section.days}</span>
+      <span>Instructor: ${section.instructor}</span>
+      <span>Location: ${section.location}</span>
+    </div>`
+  }
+
   // Handles buttons being clicked
   $('ul#course-list').on('click', function(e) {
+    //put space back in id for retreiving from course list
+    var id = e.target.id.split("-")[1];
+    var idWithSpace = id.replace(/([A-Z]+)([1-9]+)/g, '$1 $2');
+    var sections = workingCourseList.find(function(element) {
+      return element.courseID == idWithSpace;
+    }).sections;
+    console.log(sections);
+
+
     if (buttonIdRegex.test(e.target.id)) {
       var dropdownIdSelector = `#${e.target.id.replace('BUTTON-', 'DROPDOWN-')}`;
 
       if(activeDropdown != null) {
         $(activeDropdown).removeClass("active");
+        $(activeDropdown).siblings("button").html("View");
+        $(activeDropdown).children("div").remove(); //remove sections from div
       }
 
-      activeDropdown = dropdownIdSelector;
+      if(activeDropdown != dropdownIdSelector) {
+        activeDropdown = dropdownIdSelector;
 
-      $(activeDropdown).addClass("active");
+        $(activeDropdown).addClass("active");
+        $(activeDropdown).siblings("button").html("Hide");
+        $(activeDropdown).append(generateSectionsDivs(sections, id));
+      }
     }
   });
 
