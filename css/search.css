@@ -12,6 +12,10 @@ h5 {
   display: inline;
 }
 
+.section-select {
+  width: 60px;
+}
+
 .view-button {
   position: absolute;
   bottom: 3px;
@@ -25,11 +29,14 @@ h5 {
 }
 
 .expanded-placeholder {
-  display: none;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 1s; /* Safari */
+  transition: height 1s;
 }
 
 .expanded-placeholder.active {
-  display: block;
+  height: 100px;
 }
 
 .box {

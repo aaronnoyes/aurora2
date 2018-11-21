@@ -100,11 +100,23 @@ $(document).ready(function(){
           <br/>
           <span>Credits: ${course.credits}</span>
           <br/>
+          <span>Section: </span>
+          <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
+            ${generateSectionsOptions(course.sections)}
+          </select>
         </div>
         <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
           View <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC"></img>
         </button>
       </div>`
+  }
+
+  function generateSectionsOptions(sections) {
+    var options = "";
+    for(var i=0; i<sections.length; i++) {
+      options += `<option value="${sections[i].section}">${sections[i].section}</option>`;
+    }
+    return options;
   }
 
   // Handles buttons being clicked
