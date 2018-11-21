@@ -152,9 +152,10 @@ $(document).ready(function(){
 
   //show only section chosen from dropdown
   $("ul#course-list").on('change', ".section-select", function(e) {
-    var parentID = $(this).parent().parent().attr('id').split("-")[1];
+    var parentID = $(this).attr('id').split("-")[0];
     var idToShow = `${parentID}-section-${$(this).val()}`;
     var sectionDivs = $(this).parent().parent().siblings("div.section-div");
+    console.log($(this).parent());
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(idToShow == sectionDivs[i].id) {
