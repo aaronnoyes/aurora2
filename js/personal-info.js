@@ -18,19 +18,43 @@ function updateSecurityQuestion(oldQuestion, newQuestion) {
     });
 }
 
-function displayText(target) {
+function displayQuestions(target) {
     for (var i = 0; i < studentData.securityQuestions.length; i++){
         var question = studentData.securityQuestions[i].question;
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = question;
         document.getElementById(target).appendChild(opt);
-    }
-    console.log(question);
-    
+    }    
 }
 
-displayText('question1-select');
-displayText('question2-select');
+function displayDetails(){
+    document.getElementById("first-name").value = studentData.name;
+    document.getElementById("input-address").value = studentData.studentDetails[0].address;
+    document.getElementById("input-city").value = studentData.studentDetails[1].city;
+    // document.getElementById("input-postalCode").value = studentData.studentDetails[2].postalCode;
+}
 
+function displayFees(){
+    var e = document.getElementById("personal-term-select");
+    var strUser = e.options[e.selectedIndex].value;
+    var numCourses = 0;
+    for (var i = 0; i < studentData.enrolledCourses.length; i++){
+        var term = studentData.enrolledCourses[i].term;
+        if (strUser == term)
+            numCourses++;
+    }
+    var fees = numCourses * 485.11;
+    document.getElementById("term-fee").value = fees;
+}
+
+$(".selectChange").change(function (){
+    displayFees();
+});
+
+
+displayQuestions('question1-select');
+displayQuestions('question2-select');
+displayDetails();
+displayFees();
 });

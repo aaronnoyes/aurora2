@@ -153,41 +153,35 @@
       <div class="container-fluid">
         <div class="row">
           <!--for student details-->
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="details">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" id="details">
             <form>
               <fieldset>
                 <legend> Student Details</legend>
                 <div class="form-group row" id="name">
-                  <label for="first-name" class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-form-label">First
-                    Name:</label>
-                  <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
-                    <input type="text" readonly class="form-control-plaintext" id="first-name" value="John">
-                  </div>
-                  <label for="last-name" class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-form-label">Last
-                    Name:</label>
-                  <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
-                    <input type="text" readonly class="form-control-plaintext" id="last-name" value="Doe">
+                  <label for="first-name" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Name:</label>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                    <input type="text" readonly class="form-control-plaintext pull-left" id="first-name" value="">
                   </div>
                 </div>
                 <div class="form-group row" id="address">
-                  <label for="input-address" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Address:</label>
-                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                  <label for="input-address" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Address:</label>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <input type="text" class="form-control" id="input-address" placeholder="1 Manitoba Street" value="">
                   </div>
                 </div>
-                <div class="form-group row" id="city-province">
+                <div class="form-group row" id="city">
                   <label for="input-city" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">City:</label>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <input type="text" class="form-control" id="input-city" placeholder="Winnipeg" value="">
                   </div>
-                  <label for="province-select" class="col-lg-3 col-md-3 col-sm-2 col-xs-2 col-form-label">Postal
-                    Code:</label>
+                </div>
+                <div class = "form-group row">
+                  <label for="province-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Province:</label>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <select id="province-select" class="dropwdown">
-                      <option selected></option>
                       <option value="AB">AB</option>
                       <option value="BC">BC</option>
-                      <option value="MB">MB</option>
+                      <option selected value="MB">MB</option>
                       <option value="NB">NB</option>
                       <option value="NL">NL</option>
                       <option value="NT">NT</option>
@@ -210,39 +204,38 @@
             </form>
           </div>
           <!--for security questions-->
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="security-questions">
+          <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12" id="security-questions">
             <form>
               <fieldset id="q1-fieldset">
                 <legend>Secuity Questions</legend>
                 <fieldset>
                   <div class="form-group row">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Question
+                    <label for="question1-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Question
                       1:</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                       <select id="question1-select" class="dropwdown"></select>
-
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="answer-q1" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Answer
+                    <label for="answer-q1" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Answer
                       1:</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                       <input type="text" class="form-control" id="answer-q1" value="" placeholder="enter your answer here">
                     </div>
                   </div>
                 </fieldset>
                 <fieldset id="q2-fieldset">
                   <div class="form-group row">
-                    <label for="question2-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Question
+                    <label for="question2-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Question
                       2:</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                       <select id="question2-select" class="dropwdown"></select>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="answer-q2" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Answer
+                    <label for="answer-q2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">Answer
                       1:</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                       <input type="text" class="form-control" id="answer-q2" value="" placeholder="enter your answer here">
                     </div>
                   </div>
@@ -255,19 +248,24 @@
               </fieldset>
             </form>
           </div>
+        </div>
           <!--for account information-->
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="fees-info">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" id="fees-info">
             <form>
               <fieldset>
                 <legend>Tuition Fees</legend>
                 <div class="form-group row">
                   <label for="term-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label"> Term:</label>
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    <select id="term-select" class="dropwdown">
-                      <option selected value="fall 2018">Fall 2018</option>
-                      <option value="winter 2019">Winter 2019</option>
+                  
+                    <select id="personal-term-select" class="selectChange">
+                      <option selected value="FALL2018">Fall 2018</option>
+                      <option value="WINTER2019">Winter 2019</option>
                     </select>
-                  </div>
+                  
+                </div>
+                <div class="form-group row">
+                  <label for="term-fee" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label"> Fee:</label>
+                  <input type="number" readonly class="form-control-plaintext pull-left" id="term-fee" value="">
                 </div>
 
               </fieldset>
