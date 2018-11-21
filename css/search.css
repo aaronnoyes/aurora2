@@ -113,6 +113,12 @@ h5 {
       "level level-select"
       "course-number course-search";
   }
+  .expanded-placeholder {
+    flex-direction: column;
+  }
+  .expanded-placeholder.active {
+    height: 400px;
+  }
 }
 
 select.dropwdown {
