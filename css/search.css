@@ -1,6 +1,7 @@
 :root {
   --um-orange-color: #f4a629;
   --um-brown-color: #68381a;
+  --schedule-blue-color: rgb(110, 166, 192);
 }
 
 h1 {
@@ -9,11 +10,19 @@ h1 {
 }
 
 h5 {
-  display: inline;
+  margin-bottom: 30px;
 }
 
 .section-select {
   width: 60px;
+}
+
+.register-button {
+  background-color: var(--schedule-blue-color);
+  color: white;
+  box-shadow: none;
+  border-radius: 5px;
+  border: none;
 }
 
 .view-button {
@@ -33,6 +42,22 @@ h5 {
   overflow: hidden;
   -webkit-transition: height 0.5s; /* Safari */
   transition: height 0.5s;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.general-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .expanded-placeholder.active {
@@ -56,6 +81,10 @@ h5 {
   position: relative;
   min-height: 75px;
   margin-top: 10px;
+}
+
+.search-result-title {
+  margin-bottom: 30px;
 }
 
 #search-filters {
