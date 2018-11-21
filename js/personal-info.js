@@ -16,3 +16,16 @@ function updateSecurityQuestion(oldQuestion, newQuestion) {
         }
     });
 }
+
+function displaySecurityQuestion(){
+    var select = document.getElementById("question1-select");
+    for (var i = 0; i < studentData.securityQuestions.length; i++) {
+        var question = studentData.securityQuestions[i];
+        var opt = document.createElement("option");
+        var text = document.createTextNode(question);
+        opt.appendChild(question);
+        select.appendChild(opt);
+    }
+}
+
+displaySecurityQuestion();
