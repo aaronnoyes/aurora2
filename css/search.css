@@ -45,12 +45,14 @@ h5 {
   transition: height 0.5s;
 
   display: flex;
+  flex-grow: 1;
   flex-direction: row;
   justify-content: space-around;
 }
 
 .general-description {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -115,6 +117,7 @@ h5 {
   }
   .expanded-placeholder {
     flex-direction: column;
+    justify-content: space-between;
   }
   .expanded-placeholder.active {
     height: 400px;
