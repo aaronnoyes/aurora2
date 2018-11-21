@@ -9,6 +9,8 @@ $(document).ready(function(){
   var buttonIdRegex = new RegExp(/BUTTON\-/)
   var activeDropdown = null;
 
+  $('[data-toggle="tooltip"]').tooltip(); //enable tooltips
+
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
