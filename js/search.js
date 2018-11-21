@@ -15,7 +15,6 @@ $(document).ready(function(){
   //hot udpate search filter
   $("#course-search").bind('input', function(){
       searchTerm = $(this).val().toUpperCase();
-
       filterCourses();
   });
 
@@ -142,6 +141,14 @@ $(document).ready(function(){
 
   //generate info for an individual course section
   function generateSectionDiv(section, id) {
+    var formattedCourse = getCourse(id, section.section);
+    var disabledMarkup = "";
+
+    if(getConflictingCourses(studentData, formattedCourse).length > 0) {
+      console.log("conflict")
+      disabledMarkup = `disabled`
+    }
+
     return `
     <div id="${id}-section-${section.section}" class="section-div">
       <span class="days-label">Days: ${section.days}</span>
@@ -152,7 +159,7 @@ $(document).ready(function(){
       <br/>
       <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
       <br/>
-      <button class="register-button" id="${id}-register-btn-${section.section}">Register</button>
+      <button ${disabledMarkup} class="register-button" id="${id}-register-btn-${section.section}">Register</button>
     </div>`
   }
 

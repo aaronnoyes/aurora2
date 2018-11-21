@@ -26,6 +26,10 @@ h5 {
   width: 50%;
 }
 
+.register-button:disabled {
+  background-color: grey;
+}
+
 .view-button {
   position: absolute;
   bottom: 3px;
@@ -120,7 +124,7 @@ h5 {
     justify-content: space-between;
   }
   .expanded-placeholder.active {
-    height: 400px;
+    height: 350px;
   }
   input[type="color"],
   input[type="date"],
