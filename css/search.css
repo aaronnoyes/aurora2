@@ -147,6 +147,8 @@ select.dropwdown {
   -moz-appearance: none;
   appearance: none;
 
+  min-width: 30px;
+
   border-radius: 2;
   padding-left: 10px;
 

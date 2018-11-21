@@ -226,29 +226,39 @@ $(document).ready(function(){
     else if (e.target.id.split("-")[1] == "register") {
       var student = studentData;
       var cID = e.target.id.split("-")[0];
-      var cIDWithSpace = cID.replace(/([A-Z]+)([1-9]+)/g, '$1 $2');
-      var course = workingCourseList.find(function(element) {
-        return element.courseID == cIDWithSpace;
-      });
+      var sID = e.target.id.split("-")[3];
 
-      var section = course.sections.find(function(element) {
-        return element.section == e.target.id.split("-")[3];
-      });
-      var formattedCourse = {
-          name: course.name,
-          courseID: course.courseID,
-          days: section.days,
-          term: curTerm,
-          section: section.section,
-          time: {
-              start: section.time.start,
-              end: section.time.end
-          }
-      };
-      console.log(formattedCourse);
+
+      var formattedCourse = getCourse(cID, sID);
       addCourseToSchedule(student, formattedCourse);
     }
   });
+
+  function formatCourse(course, sectionID) {
+    var section = course.sections.find(function(element) {
+      return element.section == sectionID;
+    });
+    return {
+        name: course.name,
+        courseID: course.courseID,
+        days: section.days,
+        term: curTerm,
+        section: section.section,
+        time: {
+            start: section.time.start,
+            end: section.time.end
+        }
+    };
+  }
+
+  //return formatted course object using course and section ID
+  function getCourse(cID, sID) {
+    var cIDWithSpace = cID.replace(/([A-Z]+)([1-9]+)/g, '$1 $2'); //format cID like in course list
+    var course = workingCourseList.find(function(element) {
+      return element.courseID == cIDWithSpace;
+    });
+    return formatCourse(course, sID);
+  }
 
   appendCoursesToList(workingCourseList);
 });
