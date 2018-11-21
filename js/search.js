@@ -143,6 +143,8 @@ $(document).ready(function(){
       <br/>
       <span>Location: ${section.location}</span>
       <br/>
+      <span>Time: ${section.time.start} - ${section.time.end}</span>
+      <br/>
       <button class="register-button" id="${id}-register-btn-${section.section}">Register</button>
     </div>`
   }
