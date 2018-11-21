@@ -99,14 +99,18 @@ $(document).ready(function(){
         <h5 class="search-result-title">${course.courseID}: ${course.name}</h5>
         <div class="expanded-placeholder" id="DROPDOWN-${courseIDNoSpaces}">
           <div class="general-description">
-            <span class="department-label">Department: ${course.department}</span>
-            <span class="credits-label">Credits: ${course.credits}</span>
             <span class="section-label">
               Section:
               <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
                 ${generateSectionsOptions(course.sections)}
               </select>
             </span>
+            <span class="department-label">Department: ${course.department}</span>
+            <span class="credits-label">Credits: ${course.credits}</span>
+            <span> </span>
+            <span> </span>
+            <span> </span>
+            <span> </span>
           </div>
         </div>
         <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
