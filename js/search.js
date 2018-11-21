@@ -167,6 +167,9 @@ $(document).ready(function(){
         $(activeDropdown).siblings("button").html("Hide");
         $(activeDropdown).append(generateSectionsDivs(sections, id));
       }
+      else {
+        activeDropdown = null;
+      }
     }
   });
 

@@ -31,8 +31,8 @@ h5 {
 .expanded-placeholder {
   height: 0;
   overflow: hidden;
-  -webkit-transition: height 1s; /* Safari */
-  transition: height 1s;
+  -webkit-transition: height 0.5s; /* Safari */
+  transition: height 0.5s;
 }
 
 .expanded-placeholder.active {
