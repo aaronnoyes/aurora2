@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>UM Iris</title>
+  <meta charset="UTF-8">
+  </meta>
+
+  <script src="../lib/jquery-3.1.1.js"></script>
+  <script src="../lib/moment.js"></script>
+  <script src="../lib/fullcalendar.js"></script>
+  <script src="../js/init-calendar.js"></script>
+  <link rel="stylesheet" href="../lib/fullcalendar.css">
+
+  <!-- home css file -->
+  <link rel="stylesheet" type="text/css" href="../css/home.css">
+
+  <!-- search css file -->
+  <link rel="stylesheet" type="text/css" href="../css/search.css">
+
+  <!-- common css file -->
+  <link rel="stylesheet" type="text/css" href="../css/common.css">
+
+  <!-- Bootstrap Minified CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Bootstrap Compiled Javascript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- fall courses json data -->
+  <script src="../data/Fall2018CourseList.js"></script>
+
+  <!-- winter courses json data -->
+  <script src="../data/Winter2019CourseList.js"></script>
+
+  <!-- student object -->
+  <script src="../data/student-obj.js"></script>
+
+  <!-- search js file -->
+  <script src="../js/search.js"></script>
+
+  <!-- Course registration functionality -->
+  <script src="../js/course-registration.js"></script>
+
+  <!-- Personal information functionality -->
+  <script src="../js/personal-info.js"></script>
+
+  <!-- override bs nav colors -->
+  <style>
+    .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+            color: var(--um-brown-color);
+            background-color: var(--um-orange-color);
+          }
+          .nav-pills>li>a {
+            color: var(--um-brown-color);
+          }
+
+          .nav-pills {
+            margin-left: 10px;
+          }
+      </style>
+</head>
+
+<body>
+  <div class="site-header">
+    <div class="overflowing-header">
+      <img class="banner" src="../data/banner.png">
+    </div>
+  </div>
+
+    <div class="center-pills">
+      <ul class="nav nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-schedule-tab" data-toggle="pill" href="#pills-schedule" role="tab"
+            aria-controls="pills-schedule" aria-selected="true">Schedule</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-search-tab" data-toggle="pill" href="#pills-search" role="tab" aria-controls="pills-search"
+            aria-selected="false">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-personal-tab" data-toggle="pill" href="#pills-personal" role="tab"
+            aria-controls="pills-personal" aria-selected="false">Personal Info</a>
+        </li>
+        <li class="pull-right">
+          <form method="GET" action="login.html">
+            <button type="submit" class="btn btn-default navbar-btn pull-right">Sign Out</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="tab-content" id="pills-tabContent">
+
+
+    <!-- schedule -->
+    <div class="tab-pane fade show active" id="pills-schedule" role="tabpanel" aria-labelledby="pills-schedule-tab">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-10" id="calendar-schedule"></div>
+          <div class="col-lg-1"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- search -->
+    <div class="tab-pane fade" id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+              <div id="search-filters" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                  <h4 id="term">Term</h3>
+                  <select id="term-select" class="dropwdown">
+                    <option value="w2019">Winter 2019</option>
+                    <option value="f2018">Fall 2018</option>
+                  </select>
+                  <h4 id="department">Department</h3>
+                  <input id="department-search" type="text"></input>
+                  <h4 id="level">Level</h4>
+                  <select id="level-select" class="dropwdown">
+                    <option value="all">ALL</option>
+                    <option value="0000">0000</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
+                    <option value="3000">3000</option>
+                    <option value="4000">4000</option>
+                  </select>
+                  <h4 id="course-number">Course Search</h4>
+                  <input id="course-search" type="text"></input>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+            <div id="search-results" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                <ul id="course-list">
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+          </div>
+      </div>
+    </div>
+
+
+
+    <!-- personal -->
+    <div class="tab-pane fade" id="pills-personal" role="tabpanel" aria-labelledby="pills-personal-tab">
+      <div class="container-fluid">
+        <div class="row">
+          <!--for student details-->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="details">
+            <form>
+              <fieldset>
+                <legend> Student Details</legend>
+                <div class="form-group row" id="name">
+                  <label for="first-name" class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-form-label">First
+                    Name:</label>
+                  <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+                    <input type="text" readonly class="form-control-plaintext" id="first-name" value="John">
+                  </div>
+                  <label for="last-name" class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-form-label">Last
+                    Name:</label>
+                  <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+                    <input type="text" readonly class="form-control-plaintext" id="last-name" value="Doe">
+                  </div>
+                </div>
+                <div class="form-group row" id="address">
+                  <label for="input-address" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Address:</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <input type="text" class="form-control" id="input-address" placeholder="1 Manitoba Street" value="">
+                  </div>
+                </div>
+                <div class="form-group row" id="city-province">
+                  <label for="input-city" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label">City:</label>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <input type="text" class="form-control" id="input-city" placeholder="Winnipeg" value="">
+                  </div>
+                  <label for="province-select" class="col-lg-3 col-md-3 col-sm-2 col-xs-2 col-form-label">Postal
+                    Code:</label>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <select id="province-select" class="dropwdown">
+                      <option selected></option>
+                      <option value="AB">AB</option>
+                      <option value="BC">BC</option>
+                      <option value="MB">MB</option>
+                      <option value="NB">NB</option>
+                      <option value="NL">NL</option>
+                      <option value="NT">NT</option>
+                      <option value="NS">NS</option>
+                      <option value="NU">NU</option>
+                      <option value="ON">ON</option>
+                      <option value="PE">PE</option>
+                      <option value="QC">QC</option>
+                      <option value="SK">SK</option>
+                      <option value="YT">YT</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-default">Save Changes</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <!--for security questions-->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="security-questions">
+            <form>
+              <fieldset id="q1-fieldset">
+                <legend>Secuity Questions</legend>
+                <fieldset>
+                  <div class="form-group row">
+                    <label for="question1-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Question
+                      1:</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                      <select id="question1-select" class="dropwdown">
+                        <option selected></option>
+                        <option>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</option>
+                        <option>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</option>
+                        <option>Ut enim ad minim veniam?</option>
+                        <option>quis nostrud exercitation ullamco laboris nisi?</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="answer-q1" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Answer
+                      1:</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                      <input type="text" class="form-control" id="answer-q1" value="" placeholder="enter your answer here">
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset id="q2-fieldset">
+                  <div class="form-group row">
+                    <label for="question2-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Question
+                      2:</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                      <select id="question2-select" class="dropwdown">
+                        <option selected></option>
+                        <option>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</option>
+                        <option>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</option>
+                        <option>Ut enim ad minim veniam?</option>
+                        <option>quis nostrud exercitation ullamco laboris nisi?</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="answer-q2" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 col-form-label">Answer
+                      1:</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                      <input type="text" class="form-control" id="answer-q2" value="" placeholder="enter your answer here">
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="form-group row">
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-default">Save Changes</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <!--for account information-->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="fees-info">
+            <form>
+              <fieldset>
+                <legend>Tuition Fees</legend>
+                <div class="form-group row">
+                  <label for="term-select" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-form-label"> Term:</label>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <select id="term-select" class="dropwdown">
+                      <option selected value="fall 2018">Fall 2018</option>
+                      <option value="winter 2019">Winter 2019</option>
+                    </select>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
