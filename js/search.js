@@ -98,15 +98,16 @@ $(document).ready(function(){
       <div class="search-result" id="${courseIDNoSpaces}">
         <h5 class="search-result-title">${course.courseID}: ${course.name}</h5>
         <div class="expanded-placeholder" id="DROPDOWN-${courseIDNoSpaces}">
-          <span>Department: ${course.department}</span>
-          <br/>
-          <span>Credits: ${course.credits}</span>
-          <br/>
-          <span>Section: </span>
-          <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
-            ${generateSectionsOptions(course.sections)}
-          </select>
-          <br/>
+          <div class="general-description">
+            <span class="department-label">Department: ${course.department}</span>
+            <span class="credits-label">Credits: ${course.credits}</span>
+            <span class="section-label">
+              Section:
+              <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
+                ${generateSectionsOptions(course.sections)}
+              </select>
+            </span>
+          </div>
         </div>
         <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
           View
@@ -137,13 +138,13 @@ $(document).ready(function(){
   function generateSectionDiv(section, id) {
     return `
     <div id="${id}-section-${section.section}" class="section-div">
-      <span>Days: ${section.days}</span>
+      <span class="days-label">Days: ${section.days}</span>
       <br/>
-      <span>Instructor: ${section.instructor}</span>
+      <span class="instructor-label">Instructor: ${section.instructor}</span>
       <br/>
-      <span>Location: ${section.location}</span>
+      <span class="location-label">Location: ${section.location}</span>
       <br/>
-      <span>Time: ${section.time.start} - ${section.time.end}</span>
+      <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
       <br/>
       <button class="register-button" id="${id}-register-btn-${section.section}">Register</button>
     </div>`
@@ -151,9 +152,10 @@ $(document).ready(function(){
 
   //show only section chosen from dropdown
   $("ul#course-list").on('change', ".section-select", function(e) {
-    var parentID = $(this).parent().attr('id').split("-")[1];
+    var parentID = $(this).attr('id').split("-")[0];
     var idToShow = `${parentID}-section-${$(this).val()}`;
-    var sectionDivs = $(this).siblings("div");
+    var sectionDivs = $(this).parent().parent().siblings("div.section-div");
+    console.log($(this).parent());
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(idToShow == sectionDivs[i].id) {
@@ -167,7 +169,9 @@ $(document).ready(function(){
 
   function initSectionSelectVisibility(id) {
     var first = true;
-    sectionDivs = $(`#${id}-section-select`).siblings("div");
+    sectionDivs = $(`#${id}-section-select`).parent().parent().siblings("div.section-div");
+    console.log(id);
+    console.log($(`#${id}-section-select`))
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(first) sectionDivs[i].style.display = "";
@@ -196,7 +200,7 @@ $(document).ready(function(){
       if(activeDropdown != null) {
         $(activeDropdown).removeClass("active");
         $(activeDropdown).siblings("button").html("View");
-        $(activeDropdown).children("div").remove(); //remove sections from div
+        $(activeDropdown).children("div.section-div").remove(); //remove sections from div
       }
 
       if(activeDropdown != dropdownIdSelector) {
