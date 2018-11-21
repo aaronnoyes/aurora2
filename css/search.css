@@ -23,6 +23,11 @@ h5 {
   box-shadow: none;
   border-radius: 5px;
   border: none;
+  width: 50%;
+}
+
+.register-button:disabled {
+  background-color: grey;
 }
 
 .view-button {
@@ -44,12 +49,14 @@ h5 {
   transition: height 0.5s;
 
   display: flex;
+  flex-grow: 1;
   flex-direction: row;
   justify-content: space-around;
 }
 
 .general-description {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -58,6 +65,7 @@ h5 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 200px;
 }
 
 .expanded-placeholder.active {
@@ -111,12 +119,39 @@ h5 {
       "level level-select"
       "course-number course-search";
   }
+  .expanded-placeholder {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .expanded-placeholder.active {
+    height: 350px;
+  }
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 select.dropwdown {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
+  min-width: 30px;
 
   border-radius: 2;
   padding-left: 10px;

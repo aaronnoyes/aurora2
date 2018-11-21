@@ -9,11 +9,12 @@ $(document).ready(function(){
   var buttonIdRegex = new RegExp(/BUTTON\-/)
   var activeDropdown = null;
 
+  $('[data-toggle="tooltip"]').tooltip(); //enable tooltips
+
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
       searchTerm = $(this).val().toUpperCase();
-
       filterCourses();
   });
 
@@ -99,14 +100,18 @@ $(document).ready(function(){
         <h5 class="search-result-title">${course.courseID}: ${course.name}</h5>
         <div class="expanded-placeholder" id="DROPDOWN-${courseIDNoSpaces}">
           <div class="general-description">
-            <span class="department-label">Department: ${course.department}</span>
-            <span class="credits-label">Credits: ${course.credits}</span>
             <span class="section-label">
               Section:
               <select id="${courseIDNoSpaces}-section-select" class="dropwdown section-select">
                 ${generateSectionsOptions(course.sections)}
               </select>
             </span>
+            <span class="department-label">Department: ${course.department}</span>
+            <span class="credits-label">Credits: ${course.credits}</span>
+            <span> </span>
+            <span> </span>
+            <span> </span>
+            <span> </span>
           </div>
         </div>
         <button class="view-button" id="BUTTON-${courseIDNoSpaces}">
@@ -136,6 +141,14 @@ $(document).ready(function(){
 
   //generate info for an individual course section
   function generateSectionDiv(section, id) {
+    var formattedCourse = getCourse(id, section.section);
+    var disabledMarkup = "";
+
+    if(getConflictingCourses(studentData, formattedCourse).length > 0) {
+      console.log("conflict")
+      disabledMarkup = `disabled`
+    }
+
     return `
     <div id="${id}-section-${section.section}" class="section-div">
       <span class="days-label">Days: ${section.days}</span>
@@ -146,7 +159,7 @@ $(document).ready(function(){
       <br/>
       <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
       <br/>
-      <button class="register-button" id="${id}-register-btn-${section.section}">Register</button>
+      <button ${disabledMarkup} class="register-button" id="${id}-register-btn-${section.section}">Register</button>
     </div>`
   }
 
@@ -220,29 +233,41 @@ $(document).ready(function(){
     else if (e.target.id.split("-")[1] == "register") {
       var student = studentData;
       var cID = e.target.id.split("-")[0];
-      var cIDWithSpace = cID.replace(/([A-Z]+)([1-9]+)/g, '$1 $2');
-      var course = workingCourseList.find(function(element) {
-        return element.courseID == cIDWithSpace;
-      });
+      var sID = e.target.id.split("-")[3];
+      //.prop("disabled", true)
+      $(`#${cID}-register-btn-${sID}`).prop("disabled", true)
 
-      var section = course.sections.find(function(element) {
-        return element.section == e.target.id.split("-")[3];
-      });
-      var formattedCourse = {
-          name: course.name,
-          courseID: course.courseID,
-          days: section.days,
-          term: curTerm,
-          section: section.section,
-          time: {
-              start: section.time.start,
-              end: section.time.end
-          }
-      };
-      console.log(formattedCourse);
+
+      var formattedCourse = getCourse(cID, sID);
       addCourseToSchedule(student, formattedCourse);
     }
   });
+
+  function formatCourse(course, sectionID) {
+    var section = course.sections.find(function(element) {
+      return element.section == sectionID;
+    });
+    return {
+        name: course.name,
+        courseID: course.courseID,
+        days: section.days,
+        term: curTerm,
+        section: section.section,
+        time: {
+            start: section.time.start,
+            end: section.time.end
+        }
+    };
+  }
+
+  //return formatted course object using course and section ID
+  function getCourse(cID, sID) {
+    var cIDWithSpace = cID.replace(/([A-Z]+)([1-9]+)/g, '$1 $2'); //format cID like in course list
+    var course = workingCourseList.find(function(element) {
+      return element.courseID == cIDWithSpace;
+    });
+    return formatCourse(course, sID);
+  }
 
   appendCoursesToList(workingCourseList);
 });

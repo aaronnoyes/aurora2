@@ -10,6 +10,8 @@ $(document).ready(function () {
             right: 'prev,next'
         },
         height: 750,
+	minTime: "07:00:00",
+	maxTime: "21:00:00",
         defaultView: 'agendaWeek',
         events: createFullCalendarEventsForSchedule(studentData),
         eventClick: function (event) {
