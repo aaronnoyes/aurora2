@@ -14,12 +14,10 @@ $(document).ready(function(){
   function updateWorkingTerm() {
     //default reload working term when page is loaded
     if ($("#term-select").val() == "w2019") {
-      appendCoursesToList(fullWinterCourseList);
       workingCourseList = fullWinterCourseList;
       curTerm = "WINTER2019";
     }
     else {
-      appendCoursesToList(fullFallCourseList);
       workingCourseList = fullFallCourseList;
       curTerm = "FALL2018";
     }
@@ -32,7 +30,7 @@ $(document).ready(function(){
 
   //hot udpate search filter
   $("#course-search").bind('input', function(){
-      searchTerm = $(this).val().toUpperCase();
+      searchTerm = $(this).val().toUpperCase().replace(' ', '');;
       filterCourses();
   });
 
