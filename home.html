@@ -58,18 +58,19 @@
     .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
             color: var(--um-brown-color);
             background-color: var(--um-orange-color);
-          }
-          .nav-pills>li>a {
-            color: var(--um-brown-color);
-          }
+    }
+    .nav-pills>li>a {
+      color: var(--um-brown-color);
+    }
 
-          .nav-pills {
-            margin-left: 10px;
-          }
-      </style>
+    .nav-pills {
+      margin-left: 10px;
+    }
+
+    </style>
 </head>
 
-<body>
+<body style="background-color: rgb(246, 247, 248);">
   <div class="site-header">
     <div class="overflowing-header">
       <img class="banner" src="./data/banner.png">
@@ -123,7 +124,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
-          <div id="search-filters" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+          <div id="search-filters" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10 tile">
             <h4 id="term">Term <span style="font-size: 10px;" data-toggle="tooltip" data-placement="top" title="What Term Are You Looking to Register In? ">&#9432</span></h4>
             <select id="term-select" class="dropwdown">
               <option value="w2019">Winter 2019</option>
@@ -149,7 +150,7 @@
         </div>
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
-          <div id="search-results" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10">
+          <div id="search-results" class="box col-lg-6 col-md-6 col-sm-8 col-xs-10 tile">
             <ul id="course-list">
             </ul>
           </div>
