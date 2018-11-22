@@ -10,8 +10,9 @@ h1 {
 
 #login-box {
   border-radius: 15px;
-  border: 2px solid black;
-  /* margin: 10px; */
+  background-color: white;
+  border: none;
+  margin-top: 50px;
 }
 
 #login-text {

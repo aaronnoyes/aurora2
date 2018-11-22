@@ -2,6 +2,19 @@
   --um-orange-color: #f4a629;
   --um-brown-color: #68381a;
   --schedule-blue-color: rgb(110, 166, 192);
+  --light-grey-color: rgb(246, 247, 248);
+  background-color: var(--light-grey-color);
+}
+
+body {
+  background-color: var(--light-grey-color);
+}
+
+.tile {
+  background-color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.03);
+  border-radius: 15px;
 }
 
 h1 {
@@ -85,7 +98,6 @@ h5 {
 
 .box {
   border-radius: 15px;
-  border: 2px solid black;
   padding: 10px;
   margin-top: 10px;
 }
