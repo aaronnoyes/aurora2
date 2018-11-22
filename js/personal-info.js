@@ -10,13 +10,17 @@
  * @param {string} newQuestion: The new question the user is updating to
  */
 $(document).ready(function() {
-function updateSecurityQuestion(oldQuestion, newQuestion) {
-    studentData.securityQuestions.forEach(securityQuestion => {
-        if (securityQuestion.question === oldQuestion) {
-            securityQuestion.question = newQuestion;
-        }
-    });
-}
+// function updateSecurityQuestion(oldQuestion, newQuestion) {
+//     studentData.securityQuestions.forEach(securityQuestion => {
+//         if (securityQuestion.question === oldQuestion) {
+//             securityQuestion.question = newQuestion;
+//         }
+//     });
+// }
+
+$("#security-submit-button").click(function (){
+    alert("Security question successfully updated");
+});
 
 function displayQuestions(target) {
     for (var i = 0; i < studentData.securityQuestions.length; i++){

@@ -1,7 +1,7 @@
 var studentData = {
     name: "Jane Doe",
     studentID: "1234567",
-    
+
     studentDetails: [
         {
             address: "1 Manitoba Street"
