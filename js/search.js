@@ -5,6 +5,7 @@ $(document).ready(function(){
   var workingCourseList = fullWinterCourseList;
   var curTerm = "WINTER2019";
   var searchTerm = "";
+  var searchDepartment = "";
   var re = new RegExp('.*');
   var buttonIdRegex = new RegExp(/BUTTON\-/)
   var activeDropdown = null;
@@ -15,6 +16,12 @@ $(document).ready(function(){
   //hot udpate search filter
   $("#course-search").bind('input', function(){
       searchTerm = $(this).val().toUpperCase();
+      filterCourses();
+  });
+
+  //hot udpate search filter
+  $("#department-search").bind('input', function(){
+      searchDepartment = $(this).val().toUpperCase();
       filterCourses();
   });
 
@@ -70,13 +77,16 @@ $(document).ready(function(){
   function filterCourses() {
     var courseNumber = "";
     var courseName = "";
+    var courseDeparment = ""
     courseListItems = $('div.search-result').toArray();
 
     courseListItems.forEach(courseItem => {
       courseName = courseItem.id.toUpperCase();
       courseNumber = courseName.substr(courseName.length - 4);
+      courseDeparment = $(`#${courseName} > div > div > span.department-label`).html().substring(12).toUpperCase();
+      // console.log(courseDeparment);
 
-      if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1){
+      if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1 && courseDeparment.indexOf(searchDepartment) > -1){
         courseItem.style.display = "";
       }
       else {
@@ -145,7 +155,7 @@ $(document).ready(function(){
     var disabled = false;
 
     if(getConflictingCourses(studentData, formattedCourse).length > 0) {
-      console.log("conflict")
+      // console.log("conflict")
       disabled = true;
     }
 
@@ -183,7 +193,7 @@ $(document).ready(function(){
     var parentID = $(this).attr('id').split("-")[0];
     var idToShow = `${parentID}-section-${$(this).val()}`;
     var sectionDivs = $(this).parent().parent().siblings("div.section-div");
-    console.log($(this).parent());
+    // console.log($(this).parent());
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(idToShow == sectionDivs[i].id) {
@@ -198,8 +208,8 @@ $(document).ready(function(){
   function initSectionSelectVisibility(id) {
     var first = true;
     sectionDivs = $(`#${id}-section-select`).parent().parent().siblings("div.section-div");
-    console.log(id);
-    console.log($(`#${id}-section-select`))
+    // console.log(id);
+    // console.log($(`#${id}-section-select`))
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(first) sectionDivs[i].style.display = "";
