@@ -36,7 +36,7 @@ function displayDetails(){
     document.getElementById("first-name").value = studentData.name;
     document.getElementById("input-address").value = studentData.studentDetails[0].address;
     document.getElementById("input-city").value = studentData.studentDetails[1].city;
-    // document.getElementById("input-postalCode").value = studentData.studentDetails[2].postalCode;
+    document.getElementById("input-postalCode").value = studentData.studentDetails[2].postalCode;
 }
 
 function displayFees(){
