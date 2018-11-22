@@ -5,6 +5,7 @@ $(document).ready(function(){
   var workingCourseList = fullWinterCourseList;
   var curTerm = "WINTER2019";
   var searchTerm = "";
+  var searchDepartment = "";
   var re = new RegExp('.*');
   var buttonIdRegex = new RegExp(/BUTTON\-/)
   var activeDropdown = null;
@@ -15,6 +16,12 @@ $(document).ready(function(){
   //hot udpate search filter
   $("#course-search").bind('input', function(){
       searchTerm = $(this).val().toUpperCase();
+      filterCourses();
+  });
+
+  //hot udpate search filter
+  $("#department-search").bind('input', function(){
+      searchDepartment = $(this).val().toUpperCase();
       filterCourses();
   });
 
@@ -70,13 +77,16 @@ $(document).ready(function(){
   function filterCourses() {
     var courseNumber = "";
     var courseName = "";
+    var courseDeparment = ""
     courseListItems = $('div.search-result').toArray();
 
     courseListItems.forEach(courseItem => {
       courseName = courseItem.id.toUpperCase();
       courseNumber = courseName.substr(courseName.length - 4);
+      courseDeparment = $(`#${courseName} > div > div > span.department-label`).html().substring(12).toUpperCase();
+      // console.log(courseDeparment);
 
-      if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1){
+      if(re.test(courseNumber) && courseName.indexOf(searchTerm) > -1 && courseDeparment.indexOf(searchDepartment) > -1){
         courseItem.style.display = "";
       }
       else {
@@ -142,11 +152,11 @@ $(document).ready(function(){
   //generate info for an individual course section
   function generateSectionDiv(section, id) {
     var formattedCourse = getCourse(id, section.section);
-    var disabledMarkup = "";
+    var disabled = false;
 
     if(getConflictingCourses(studentData, formattedCourse).length > 0) {
-      console.log("conflict")
-      disabledMarkup = `disabled`
+      // console.log("conflict")
+      disabled = true;
     }
 
     return `
@@ -159,8 +169,23 @@ $(document).ready(function(){
       <br/>
       <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
       <br/>
-      <button ${disabledMarkup} class="register-button" id="${id}-register-btn-${section.section}">Register</button>
+      ${getProperButton(disabled, id, section.section)}
     </div>`
+  }
+
+  //returns either disabled button or normal button
+  function getProperButton(disabled, cID, sID) {
+    if(disabled) {
+      return `
+      <span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict">
+        <button disabled class="register-button" id="${cID}-register-btn-${sID}">Register</button>
+      </span>`
+    }
+    else {
+      return `
+      <button class="register-button" id="${cID}-register-btn-${sID}">Register</button>
+      `
+    }
   }
 
   //show only section chosen from dropdown
@@ -168,7 +193,7 @@ $(document).ready(function(){
     var parentID = $(this).attr('id').split("-")[0];
     var idToShow = `${parentID}-section-${$(this).val()}`;
     var sectionDivs = $(this).parent().parent().siblings("div.section-div");
-    console.log($(this).parent());
+    // console.log($(this).parent());
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(idToShow == sectionDivs[i].id) {
@@ -183,8 +208,8 @@ $(document).ready(function(){
   function initSectionSelectVisibility(id) {
     var first = true;
     sectionDivs = $(`#${id}-section-select`).parent().parent().siblings("div.section-div");
-    console.log(id);
-    console.log($(`#${id}-section-select`))
+    // console.log(id);
+    // console.log($(`#${id}-section-select`))
 
     for(var i=0; i<sectionDivs.length; i++) {
       if(first) sectionDivs[i].style.display = "";
@@ -222,6 +247,7 @@ $(document).ready(function(){
         $(activeDropdown).addClass("active");
         $(activeDropdown).siblings("button").html("Hide");
         $(activeDropdown).append(generateSectionsDivs(sections, id));
+        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
         initSectionSelectVisibility(id);
       }
       else {
@@ -235,8 +261,10 @@ $(document).ready(function(){
       var cID = e.target.id.split("-")[0];
       var sID = e.target.id.split("-")[3];
       //.prop("disabled", true)
-      $(`#${cID}-register-btn-${sID}`).prop("disabled", true)
-
+      $(`#${cID}-register-btn-${sID}`).prop("disabled", true);
+      $(`#${cID}-register-btn-${sID}`).wrap('<span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict"></span>');
+      // '<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip"></span>'
+      $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
 
       var formattedCourse = getCourse(cID, sID);
       addCourseToSchedule(student, formattedCourse);
