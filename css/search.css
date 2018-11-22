@@ -28,6 +28,8 @@ h5 {
 
 .register-button:disabled {
   background-color: grey;
+  width: 100%;
+  pointer-events: none;
 }
 
 .view-button {

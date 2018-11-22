@@ -142,11 +142,11 @@ $(document).ready(function(){
   //generate info for an individual course section
   function generateSectionDiv(section, id) {
     var formattedCourse = getCourse(id, section.section);
-    var disabledMarkup = "";
+    var disabled = false;
 
     if(getConflictingCourses(studentData, formattedCourse).length > 0) {
       console.log("conflict")
-      disabledMarkup = `disabled`
+      disabled = true;
     }
 
     return `
@@ -159,8 +159,23 @@ $(document).ready(function(){
       <br/>
       <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
       <br/>
-      <button ${disabledMarkup} class="register-button" id="${id}-register-btn-${section.section}">Register</button>
+      ${getProperButton(disabled, id, section.section)}
     </div>`
+  }
+
+  //returns either disabled button or normal button
+  function getProperButton(disabled, cID, sID) {
+    if(disabled) {
+      return `
+      <span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict">
+        <button disabled class="register-button" id="${cID}-register-btn-${sID}">Register</button>
+      </span>`
+    }
+    else {
+      return `
+      <button class="register-button" id="${cID}-register-btn-${sID}">Register</button>
+      `
+    }
   }
 
   //show only section chosen from dropdown
@@ -222,6 +237,7 @@ $(document).ready(function(){
         $(activeDropdown).addClass("active");
         $(activeDropdown).siblings("button").html("Hide");
         $(activeDropdown).append(generateSectionsDivs(sections, id));
+        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
         initSectionSelectVisibility(id);
       }
       else {
@@ -235,8 +251,10 @@ $(document).ready(function(){
       var cID = e.target.id.split("-")[0];
       var sID = e.target.id.split("-")[3];
       //.prop("disabled", true)
-      $(`#${cID}-register-btn-${sID}`).prop("disabled", true)
-
+      $(`#${cID}-register-btn-${sID}`).prop("disabled", true);
+      $(`#${cID}-register-btn-${sID}`).wrap('<span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict"></span>');
+      // '<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip"></span>'
+      $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
 
       var formattedCourse = getCourse(cID, sID);
       addCourseToSchedule(student, formattedCourse);
