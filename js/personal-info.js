@@ -56,6 +56,11 @@ $(".selectChange").change(function (){
     displayFees();
 });
 
+$('a[data-toggle="pill"]').on('shown.bs.tab', function(e) {
+    if (e.target.id === "pills-personal-tab") {
+        displayFees();
+    }
+});
 
 displayQuestions('question1-select');
 displayQuestions('question2-select');
