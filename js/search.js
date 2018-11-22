@@ -10,6 +10,21 @@ $(document).ready(function(){
   var buttonIdRegex = new RegExp(/BUTTON\-/)
   var activeDropdown = null;
 
+
+  function updateWorkingTerm() {
+    //default reload working term when page is loaded
+    if ($("#term-select").val() == "w2019") {
+      appendCoursesToList(fullWinterCourseList);
+      workingCourseList = fullWinterCourseList;
+      curTerm = "WINTER2019";
+    }
+    else {
+      appendCoursesToList(fullFallCourseList);
+      workingCourseList = fullFallCourseList;
+      curTerm = "FALL2018";
+    }
+  }
+
   $('[data-toggle="tooltip"]').tooltip(); //enable tooltips
   $("#success-alert").hide();
 
@@ -302,4 +317,5 @@ $(document).ready(function(){
   }
 
   appendCoursesToList(workingCourseList);
+  updateWorkingTerm();
 });
