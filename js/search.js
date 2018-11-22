@@ -27,6 +27,7 @@ $(document).ready(function(){
 
   $('[data-toggle="tooltip"]').tooltip(); //enable tooltips
   $("#success-alert").hide();
+  updateWorkingTerm();
 
 
   //hot udpate search filter
@@ -317,5 +318,4 @@ $(document).ready(function(){
   }
 
   appendCoursesToList(workingCourseList);
-  updateWorkingTerm();
 });
