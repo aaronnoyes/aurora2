@@ -9,6 +9,13 @@ h1 {
   margin-bottom: 50px;
 }
 
+.top-corner {
+   position: fixed;
+   top:0;
+   right:0;
+   display: none;
+}
+
 h5 {
   margin-bottom: 30px;
 }

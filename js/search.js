@@ -11,6 +11,7 @@ $(document).ready(function(){
   var activeDropdown = null;
 
   $('[data-toggle="tooltip"]').tooltip(); //enable tooltips
+  $("#success-alert").hide();
 
 
   //hot udpate search filter
@@ -268,6 +269,9 @@ $(document).ready(function(){
 
       var formattedCourse = getCourse(cID, sID);
       addCourseToSchedule(student, formattedCourse);
+      $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+      });
     }
   });
 
