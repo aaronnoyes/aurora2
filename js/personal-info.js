@@ -10,15 +10,16 @@
  * @param {string} newQuestion: The new question the user is updating to
  */
 $(document).ready(function() {
-// function updateSecurityQuestion(oldQuestion, newQuestion) {
-//     studentData.securityQuestions.forEach(securityQuestion => {
-//         if (securityQuestion.question === oldQuestion) {
-//             securityQuestion.question = newQuestion;
-//         }
-//     });
-// }
+function updateSecurityQuestion(oldQuestion, newQuestion) {
+    studentData.securityQuestions.forEach(securityQuestion => {
+        if (securityQuestion.question === oldQuestion) {
+            securityQuestion.question = newQuestion;
+        }
+    });
+}
 
 $("#security-submit-button").click(function (){
+    var question = studentData.
     alert("Security question successfully updated");
 });
 
@@ -33,10 +34,10 @@ function displayQuestions(target) {
 }
 
 function displayDetails(){
-    document.getElementById("first-name").value = studentData.name;
-    document.getElementById("input-address").value = studentData.studentDetails[0].address;
-    document.getElementById("input-city").value = studentData.studentDetails[1].city;
-    document.getElementById("input-postalCode").value = studentData.studentDetails[2].postalCode;
+    $('#first-name').val(studentData.name);
+    $('#input-address').val(studentData.studentDetails[0].address);
+    $('#input-city').val(studentData.studentDetails[1].city);
+    $('#input-postalCode').val(studentData.studentDetails[2].postalCode);
 }
 
 function displayFees(){

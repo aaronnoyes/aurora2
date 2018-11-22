@@ -23,9 +23,6 @@ var studentData = {
         },
         {
             question: "What is the name of your first manager?"
-        },
-        {
-            question: "What is your mother's maiden name?"
         }
     ],
     enrolledCourses: [

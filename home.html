@@ -95,7 +95,7 @@
           aria-selected="false">Personal Info</a>
       </li>
       <li class="pull-right">
-        <form method="GET" action="login.html">
+        <form method="GET" action="index.html">
           <button type="submit" class="btn btn-default navbar-btn pull-right">Sign Out</button>
         </form>
       </li>
@@ -205,13 +205,11 @@
                   </select>
 
                 </div>
-                <div class="form-group row">
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-default">Save Changes</button>
-                  </div>
-                </div>
               </fieldset>
             </form>
+            <div class="text-center">
+              <button class="btn btn-default">Save Changes</button>
+            </div>
           </div>
           <!--for security questions-->
           <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12" id="security-questions">
@@ -221,7 +219,12 @@
                 <fieldset id="q1-fieldset">
                   <div class="form-group row">
                     <label class="questionLabel">Question1:</label>
-                    <select id="question1-select" class="dropwdown question-select"></select>
+                    <select id="question1-select" class="dropwdown question-select">
+                      <option id="opt1-selected"></option>
+                      <option>Who is your favorite actor, musician, or artist?</option>
+                      <option>In what city were you born?</option>
+                      <option>What is your favorite movie?</option>
+                    </select>
                   </div>
                   <div class="form-group row">
                     <label class="answerLabel">Answer1:</label>
@@ -231,20 +234,23 @@
                 <fieldset id="q2-fieldset">
                   <div class="form-group row">
                     <label class="questionLabel">Question2:</label>
-                    <select id="question2-select" class="dropwdown question-select"></select>
+                    <select id="question2-select" class="dropwdown question-select">
+                      <option id="opt2-selected"></option>
+                      <option>What street did you grow up on?</option>
+                      <option>What is the name of your first grade teacher?</option>
+                      <option>What high school did you attend?</option>
+                    </select>
                   </div>
                   <div class="form-group row">
                     <label class="answerLabel">Answer2:</label>
                     <input type="text" id="answer-q2" value="" placeholder="enter your answer here">
                   </div>
                 </fieldset>
-                <div class="form-group row">
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-default" id="security-submit-button">Save Changes</button>
-                  </div>
-                </div>
               </fieldset>
             </form>
+            <div class="text-center">
+              <button type="button" class="btn btn-default" id="security-submit-button">Save Changes</button>
+            </div>
           </div>
         </div>
         <!--for account information-->
