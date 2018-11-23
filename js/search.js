@@ -126,11 +126,16 @@ function generateSectionsDivs(sections, id) {
 //generate info for an individual course section
 function generateSectionDiv(section, id) {
   var formattedCourse = getCourse(id, section.section);
-  var disabled = false;
+  var buttonMarkup = "";
 
-  if(getConflictingCourses(studentData, formattedCourse).length > 0) {
-    // console.log("conflict")
-    disabled = true;
+  if (studentIsRegisteredInCourse(studentData, id)) {
+    buttonMarkup = getCourseConflictRegisterButton(id, section.section);
+  }
+  else if (getConflictingCourses(studentData, formattedCourse).length > 0) {
+    buttonMarkup = getTimeConflictRegisterButton(id, section.section);
+  }
+  else {
+    buttonMarkup = getRegisterButton(id, section.section);
   }
 
   return `
@@ -143,23 +148,26 @@ function generateSectionDiv(section, id) {
     <br/>
     <span class="time-label">Time: ${section.time.start} - ${section.time.end}</span>
     <br/>
-    ${getProperButton(disabled, id, section.section)}
+    ${buttonMarkup}
   </div>`
 }
 
-//returns either disabled button or normal button
-function getProperButton(disabled, cID, sID) {
-  if(disabled) {
+function getRegisterButton(cID, sID) {
+  return `<button class="register-button" id="${cID}-register-btn-${sID}">Register</button>`;
+}
+
+function getTimeConflictRegisterButton(cID, sID) {
     return `
     <span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict">
       <button disabled class="register-button" id="${cID}-register-btn-${sID}">Register</button>
     </span>`
-  }
-  else {
+}
+
+function getCourseConflictRegisterButton(cID, sID) {
     return `
-    <button class="register-button" id="${cID}-register-btn-${sID}">Register</button>
-    `
-  }
+    <span style="width: 50%;" data-toggle="tooltip" title="Already registered in ${cID}">
+      <button disabled class="register-button" id="${cID}-register-btn-${sID}">Register</button>
+    </span>`
 }
 
 function initSectionSelectVisibility(id) {
@@ -308,7 +316,7 @@ $(() => {
       var cID = e.target.id.split("-")[0];
       var sID = e.target.id.split("-")[3];
       $(`#${cID}-register-btn-${sID}`).prop("disabled", true);
-      $(`#${cID}-register-btn-${sID}`).wrap('<span style="width: 50%;" data-toggle="tooltip" title="Cannot Register Due To Time Conflict"></span>');
+      $(`#${cID}-register-btn-${sID}`).wrap(`<span style="width: 50%;" data-toggle="tooltip" title="Already registered in ${cID}"></span>`);
       $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
 
       var formattedCourse = getCourse(cID, sID);

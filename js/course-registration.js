@@ -15,6 +15,17 @@ function convertDaysToNumbers(dayArray) {
     return dayArray.map(day => dayOfTheWeekToNumber[day]);
 }
 
+function studentIsRegisteredInCourse(student, courseID) {
+    var checkID = courseID.replace(/\ /g, '');
+
+    for (var i = 0; i < student.enrolledCourses.length; i++) {
+        if (student.enrolledCourses[i].courseID.replace(/\ /g, '') === checkID) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /**
  * Get all of the courses in the user's schedule that conflict with the course to be registered
