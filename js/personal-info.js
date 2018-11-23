@@ -11,18 +11,29 @@
  */
 $(document).ready(function() {
 $("#security-submit-button").click(function (){
+    var updated = false;
+
     var q1 = document.getElementById("question1-select");
     var str1 = q1.options[q1.selectedIndex].value;
-    studentData.securityQuestions[0].question = str1;
+    if (studentData.securityQuestions[0].question !== str1) {
+        studentData.securityQuestions[0].question = str1;
+        updated = true;
+    }
 
     var q2 = document.getElementById("question2-select");
     var str2 = q2.options[q2.selectedIndex].value;
     studentData.securityQuestions[1].question = str2;
-    
-    displayQuestions();
-    $("#saved-alert").fadeTo(2000, 500).slideUp(500, function(){
-        $("#saved-alert").slideUp(500);
-    });
+    if (studentData.securityQuestions[1].question !== str2) {
+        studentData.securityQuestions[1].question = str2;
+        updated = true;
+    }
+
+    if (updated) {
+        displayQuestions();
+        $("#saved-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#saved-alert").slideUp(500);
+        });
+    }
 });
 
 function displayQuestions() {
