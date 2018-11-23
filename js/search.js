@@ -243,35 +243,10 @@ $(() => {
 
   //changed course level
   $("#level-select").change(function () {
-
-    var level = $(this).val()[0];
-    // var lastFive = id.substr(id.length - 5);
-
-
-    switch (level) {
-      case "0":
-        courseNumberRegex = new RegExp('[0][0-9]{3}');
-        break;
-      case "1":
-        courseNumberRegex = new RegExp('[1][0-9]{3}');
-        break;
-      case "2":
-        courseNumberRegex = new RegExp('[2][0-9]{3}');
-        break;
-      case "3":
-        courseNumberRegex = new RegExp('[3][0-9]{3}');
-        break;
-      case "4":
-        courseNumberRegex = new RegExp('[4][0-9]{3}');
-        break;
-      default:
-        courseNumberRegex = new RegExp('.*');
-
-    }
-
+    var optionValue = $(this).val().toUpperCase();
+    courseNumberRegex = optionValue === "ALL" ? new RegExp('.*') : new RegExp(`[${optionValue[0]}][0-9]{3}`);
     filterCourses();
   });
-
 
   //show only section chosen from dropdown
   $("ul#course-list").on('change', ".section-select", function(e) {
