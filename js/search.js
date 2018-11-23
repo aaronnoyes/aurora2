@@ -81,7 +81,7 @@ function getCourseMarkup(course) {
 
   return `
     <div class="search-result" id="${courseIDNoSpaces}">
-      <h5 class="search-result-title">${course.courseID}: ${course.name}</h5>
+      <h5 class="search-result-title"><b>${course.courseID}: ${course.name}</b></h5>
       <div class="expanded-placeholder" id="DROPDOWN-${courseIDNoSpaces}">
         <div class="general-description">
           <span class="section-label">
