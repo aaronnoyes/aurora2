@@ -15,7 +15,7 @@ $("#security-submit-button").click(function (){
     var str1 = q1.options[q1.selectedIndex].value;
     studentData.securityQuestions[0].question = str1;
 
-    var q2 = document.getElementById("question1-select");
+    var q2 = document.getElementById("question2-select");
     var str2 = q2.options[q2.selectedIndex].value;
     studentData.securityQuestions[1].question = str2;
     
