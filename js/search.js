@@ -1,6 +1,6 @@
 var fullFallCourseList = fall2018Courses.courses;
 var fullWinterCourseList = winter2019Courses.courses;
-var curTerm = "WINTER2019";
+var curTerm = "FALL2018";
 var searchTerm = "";
 var searchDepartment = "";
 var courseNumberRegex = new RegExp('.*');
@@ -8,7 +8,7 @@ var buttonIdRegex = new RegExp(/BUTTON\-/)
 var activeDropdown = null;
 
 var maxNumberCourses = 10;
-var workingCourseList = fullWinterCourseList;
+var workingCourseList = fullFallCourseList;
 var currentNumberCoursesDisplayed = 0;
 
 function updateWorkingTerm() {
