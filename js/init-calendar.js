@@ -7,7 +7,7 @@ $(document).ready(function () {
         header: {
             left: 'month,agendaWeek',
             center: 'title',
-            right: 'prev,next'
+            right: 'prev,today,next'
         },
         height: 750,
 	minTime: "07:00:00",
