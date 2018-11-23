@@ -80,6 +80,9 @@
   <div class="alert alert-success top-corner" id="success-alert">
     <strong>Success! </strong> Registered for Course
   </div>
+  <div class="alert alert-success top-corner" id="saved-alert">
+      <strong>Success! </strong> Saved new security questions.
+    </div>
 
   <div class="center-pills">
     <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -166,7 +169,7 @@
       <div class="container-fluid">
         <div class="row">
           <!--for student details-->
-          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" id="details">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 tile formPads" id="details">
             <form id="studentDet">
               <fieldset class="fieldset">
                 <legend class="legend"> Student Details</legend>
@@ -209,11 +212,11 @@
               </fieldset>
             </form>
             <div class="text-center">
-              <button class="btn btn-default">Save Changes</button>
+              <button class="btn btn-default btn-pads" id="student-det-button">Save Changes</button>
             </div>
           </div>
           <!--for security questions-->
-          <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12" id="security-questions">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 tile formPads" id="security-questions">  
             <form>
               <fieldset class="fieldset Details">
                 <legend class="legend">Secuity Questions</legend>
@@ -225,11 +228,12 @@
                       <option>Who is your favorite actor, musician, or artist?</option>
                       <option>In what city were you born?</option>
                       <option>What is your favorite movie?</option>
+                      <option>What is the name of your first pet?</option>
                     </select>
                   </div>
                   <div class="form-group row">
                     <label class="answerLabel">Answer1:</label>
-                    <input type="text" id="answer-q1" value="" placeholder="enter your answer here">
+                    <input type="text" id="answer-q1" value="">
                   </div>
                 </fieldset>
                 <fieldset id="q2-fieldset">
@@ -240,22 +244,24 @@
                       <option>What street did you grow up on?</option>
                       <option>What is the name of your first grade teacher?</option>
                       <option>What high school did you attend?</option>
+                      <option>What is the name of your first manager?</option>
                     </select>
                   </div>
                   <div class="form-group row">
                     <label class="answerLabel">Answer2:</label>
-                    <input type="text" id="answer-q2" value="" placeholder="enter your answer here">
+                    <input type="text" id="answer-q2" value="">
                   </div>
                 </fieldset>
               </fieldset>
             </form>
             <div class="text-center">
-              <button type="button" class="btn btn-default" id="security-submit-button">Save Changes</button>
+              <button class="btn btn-default btn-pads" id="security-submit-button">Save Changes</button>
             </div>
+          
           </div>
         </div>
         <!--for account information-->
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" id="fees-info">
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 tile formPads" id="fees-info">
           <form>
             <fieldset class="fieldsetFee">
               <legend class="legend">Tuition Fees</legend>

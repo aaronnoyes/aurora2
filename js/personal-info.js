@@ -10,27 +10,26 @@
  * @param {string} newQuestion: The new question the user is updating to
  */
 $(document).ready(function() {
-function updateSecurityQuestion(oldQuestion, newQuestion) {
-    studentData.securityQuestions.forEach(securityQuestion => {
-        if (securityQuestion.question === oldQuestion) {
-            securityQuestion.question = newQuestion;
-        }
-    });
-}
-
 $("#security-submit-button").click(function (){
-    var question = studentData.
-    alert("Security question successfully updated");
+    var q1 = document.getElementById("question1-select");
+    var str1 = q1.options[q1.selectedIndex].value;
+    studentData.securityQuestions[0].question = str1;
+
+    var q2 = document.getElementById("question1-select");
+    var str2 = q2.options[q2.selectedIndex].value;
+    studentData.securityQuestions[1].question = str2;
+    
+    displayQuestions();
+    $("#saved-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#saved-alert").slideUp(500);
+    });
 });
 
-function displayQuestions(target) {
-    for (var i = 0; i < studentData.securityQuestions.length; i++){
-        var question = studentData.securityQuestions[i].question;
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = question;
-        document.getElementById(target).appendChild(opt);
-    }    
+function displayQuestions() {
+        $("#opt1-selected").text(studentData.securityQuestions[0].question);
+        $("#opt2-selected").text(studentData.securityQuestions[1].question);
+        $('#answer-q1').val('');
+        $('#answer-q2').val('');
 }
 
 function displayDetails(){
@@ -59,12 +58,9 @@ $(".selectChange").change(function (){
 
 $('a[data-toggle="pill"]').on('shown.bs.tab', function(e) {
     if (e.target.id === "pills-personal-tab") {
+        displayQuestions();
+        displayDetails();   
         displayFees();
     }
 });
-
-displayQuestions('question1-select');
-displayQuestions('question2-select');
-displayDetails();
-displayFees();
 });
